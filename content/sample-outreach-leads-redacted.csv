@@ -1,0 +1,2 @@
+company,city,province,website,email,phone,services,use_case,status,notes
+Example Accounting Firm,Cape Town,Western Cape,https://example.com,hello@example.com,0000000000,"Accounting, payroll, tax compliance","Client intake assistant and compliance checklist tracker",sample,"Synthetic row for portfolio documentation"
