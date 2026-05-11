@@ -1,120 +1,128 @@
-import React from 'react';
-import { ParticlesBackground } from '@/components/ParticlesBackground';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+import Link from 'next/link';
+import { Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Navbar } from '@/components/Navbar';
-import { Shield, Sparkles } from 'lucide-react';
-import { AIText } from '@/components/AIText';
-import Link from 'next/link';
 
 export default async function LoginPage({
-    searchParams,
+  searchParams,
 }: {
-    searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string }>;
 }) {
-    const { error } = await searchParams;
+  const { error } = await searchParams;
 
-    return (
-        <main className="min-h-screen bg-charcoal text-white relative flex flex-col pt-24 pb-16">
-            <ParticlesBackground />
-            <Navbar />
+  return (
+    <main className="min-h-screen bg-paper text-ink">
+      <Navbar />
 
-            <div className="flex-1 flex items-center justify-center p-4 relative z-10 w-full max-w-md mx-auto">
-                <Card className="glass border-white/5 w-full">
-                    <CardHeader className="text-center space-y-4 pt-8">
-                        <div className="mx-auto w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-2 border border-white/10">
-                            <Shield className="w-6 h-6 text-gold" />
-                        </div>
-                        <CardTitle className="text-2xl font-bold tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-                            <AIText tech="Authorized Access Node" plain="Client Portal Login" />
-                        </CardTitle>
-                        <CardDescription className="text-white/50 pb-2">
-                            Access your custom AI roadmaps, secure NDAs, and private dashboards.
-                        </CardDescription>
+      <section className="mx-auto grid min-h-screen max-w-7xl items-center gap-12 px-6 pb-20 pt-32 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="max-w-xl">
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-coral">Client Portal</p>
+          <h1 className="mt-4 text-5xl font-semibold leading-none md:text-7xl">
+            Secure workspace for active AI projects.
+          </h1>
+          <p className="mt-6 text-lg leading-8 text-ink/64">
+            Access roadmaps, workflow notes, project files, and review checkpoints once
+            your AI Nexus engagement is active.
+          </p>
+        </div>
 
-                        {error && (
-                            <div className="p-3 bg-red-500/10 border border-red-500/20 text-red-500 text-sm rounded-lg">
-                                {error}
-                            </div>
-                        )}
-                    </CardHeader>
-
-                    <CardContent className="space-y-6">
-                        <form action="/auth/login" method="post" className="space-y-4">
-                            <div className="space-y-2 text-left">
-                                <Label htmlFor="email" className="text-xs text-white/50 uppercase tracking-wider font-bold">Business Email</Label>
-                                <Input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    required
-                                    placeholder="exec@company.com"
-                                    className="bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-gold/50"
-                                />
-                            </div>
-                            <div className="space-y-2 text-left">
-                                <Label htmlFor="password" className="text-xs text-white/50 uppercase tracking-wider font-bold">Password</Label>
-                                <Input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    required
-                                    placeholder="••••••••"
-                                    className="bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-gold/50"
-                                />
-                            </div>
-
-                            <Button type="submit" className="w-full bg-gold text-charcoal hover:bg-gold/80 font-bold">
-                                Sign In
-                            </Button>
-                        </form>
-
-                        <div className="relative">
-                            <div className="absolute inset-0 flex items-center">
-                                <span className="w-full border-t border-white/10" />
-                            </div>
-                            <div className="relative flex justify-center text-xs uppercase">
-                                <span className="bg-[#0f172a]/80 backdrop-blur-md px-2 text-white/40">
-                                    Or continue with
-                                </span>
-                            </div>
-                        </div>
-
-                        <form action="/auth/google" method="get">
-                            <Button type="submit" variant="outline" className="w-full border-white/10 bg-white/5 hover:bg-white/10 text-white">
-                                <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
-                                    <path
-                                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                                        fill="#4285F4"
-                                    />
-                                    <path
-                                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                                        fill="#34A853"
-                                    />
-                                    <path
-                                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                                        fill="#FBBC05"
-                                    />
-                                    <path
-                                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                                        fill="#EA4335"
-                                    />
-                                    <path d="M1 1h22v22H1z" fill="none" />
-                                </svg>
-                                Google
-                            </Button>
-                        </form>
-                    </CardContent>
-
-                    <CardFooter className="flex flex-col gap-4 text-center">
-                        <p className="text-xs text-white/30 px-6">
-                            Enterprise access is invitation-only. Need access? <Link href="/#contact" className="text-gold hover:underline">Contact our team</Link>.
-                        </p>
-                    </CardFooter>
-                </Card>
+        <div className="mx-auto w-full max-w-md rounded-md border border-ink/12 bg-white p-6 shadow-2xl shadow-ink/8">
+          <div className="mb-7 flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blueprint/15 bg-blueprint/8">
+              <Shield className="h-6 w-6 text-blueprint" />
             </div>
-        </main>
-    );
+            <div>
+              <h2 className="text-2xl font-semibold text-ink">Client Portal Login</h2>
+              <p className="mt-1 text-sm text-ink/54">Invitation-only access.</p>
+            </div>
+          </div>
+
+          {error && (
+            <div className="mb-5 rounded-md border border-red-500/20 bg-red-500/8 p-3 text-sm font-semibold text-red-700">
+              {error}
+            </div>
+          )}
+
+          <form action="/auth/login" method="post" className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-xs font-black uppercase tracking-[0.16em] text-ink/50">
+                Business Email
+              </Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                required
+                placeholder="exec@company.com"
+                className="h-12 rounded-md border-ink/12 bg-paper text-ink placeholder:text-ink/34"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-xs font-black uppercase tracking-[0.16em] text-ink/50">
+                Password
+              </Label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                required
+                placeholder="Password"
+                className="h-12 rounded-md border-ink/12 bg-paper text-ink placeholder:text-ink/34"
+              />
+            </div>
+
+            <Button type="submit" className="h-12 w-full rounded-md bg-ink font-bold text-white hover:bg-blueprint">
+              Sign in
+            </Button>
+          </form>
+
+          <div className="my-6 flex items-center gap-3">
+            <span className="h-px flex-1 bg-ink/10" />
+            <span className="text-xs font-black uppercase tracking-[0.14em] text-ink/36">
+              Or continue with
+            </span>
+            <span className="h-px flex-1 bg-ink/10" />
+          </div>
+
+          <form action="/auth/google" method="get">
+            <Button
+              type="submit"
+              variant="outline"
+              className="h-12 w-full rounded-md border-ink/12 bg-white font-bold text-ink hover:bg-stone"
+            >
+              <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
+                <path
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  fill="#4285F4"
+                />
+                <path
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  fill="#34A853"
+                />
+                <path
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  fill="#FBBC05"
+                />
+                <path
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  fill="#EA4335"
+                />
+              </svg>
+              Google
+            </Button>
+          </form>
+
+          <p className="mt-6 text-center text-xs leading-6 text-ink/48">
+            Need access?{' '}
+            <Link href="/#contact" className="font-bold text-blueprint hover:underline">
+              Contact the AI Nexus team
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+    </main>
+  );
 }

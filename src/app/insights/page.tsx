@@ -1,71 +1,72 @@
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/mdx';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { BookOpen, Calendar, ArrowRight } from 'lucide-react';
+import { ArrowRight, BookOpen, Calendar } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 
 export const metadata = {
-    title: 'Insights & Methodology | AI Nexus Consulting',
-    description: 'Thought leadership and Afro-futurist strategies for enterprise AI deployment in emerging markets.',
+  title: 'Insights & Methodology | AI Nexus Consulting',
+  description:
+    'Practical notes on POPIA-aware AI workflows, human approval, and automation strategy for South African businesses.',
 };
 
 export default function InsightsPage() {
-    const posts = getAllPosts();
+  const posts = getAllPosts();
 
-    return (
-        <div className="min-h-screen bg-charcoal text-white selection:bg-gold/30">
-            <Navbar />
+  return (
+    <div className="min-h-screen bg-paper text-ink">
+      <Navbar />
 
-            <main className="pt-32 pb-24 px-6 relative z-10 max-w-7xl mx-auto">
-                <div className="mb-16 max-w-2xl">
-                    <Badge variant="outline" className="border-gold text-gold bg-gold/5 mb-4 uppercase tracking-widest text-[10px]">
-                        Thought Leadership
-                    </Badge>
-                    <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6 tracking-tight">
-                        Insights & <span className="text-gradient-gold">Methodology</span>
-                    </h1>
-                    <p className="text-white/60 text-lg leading-relaxed">
-                        Explore our engineering deep-dives, Afro-futurist design principles, and strategies for deploying compliant, human-centric AI systems.
-                    </p>
-                </div>
-
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {posts.map((post) => (
-                        <Link href={`/insights/${post.slug}`} key={post.slug}>
-                            <Card className="glass border-white/5 h-full hover:border-gold/30 transition-all duration-300 group overflow-hidden">
-                                <CardContent className="p-6 md:p-8 flex flex-col h-full">
-                                    <div className="flex items-center gap-4 text-xs text-white/40 mb-6 font-mono">
-                                        <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{new Date(post.date).toLocaleDateString()}</span>
-                                        <span className="w-1 h-1 bg-white/20 rounded-full" />
-                                        <span className="flex items-center gap-1.5 text-gold/80"><BookOpen className="w-3.5 h-3.5" />{post.readingTime}</span>
-                                    </div>
-                                    <h2 className="text-2xl font-bold font-heading mb-4 group-hover:text-gold transition-colors leading-tight">
-                                        {post.title}
-                                    </h2>
-                                    <p className="text-white/50 text-sm leading-relaxed mb-8 flex-grow">
-                                        {post.excerpt}
-                                    </p>
-                                    <div className="flex items-center text-xs font-bold text-gold uppercase tracking-widest group-hover:translate-x-2 transition-transform">
-                                        Read Article <ArrowRight className="w-4 h-4 ml-2" />
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </Link>
-                    ))}
-                </div>
-
-                {posts.length === 0 && (
-                    <div className="text-center py-24 glass border-white/5 rounded-2xl">
-                        <BookOpen className="w-12 h-12 text-white/20 mx-auto mb-4" />
-                        <h3 className="text-xl font-bold text-white/60">No insights published yet.</h3>
-                        <p className="text-white/40 mt-2">Check back soon for engineering deep-dives.</p>
-                    </div>
-                )}
-            </main>
-
-            <Footer />
+      <main className="mx-auto max-w-7xl px-6 pb-24 pt-32">
+        <div className="max-w-3xl">
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-coral">Field Notes</p>
+          <h1 className="mt-4 text-5xl font-semibold leading-none md:text-7xl">
+            Insights & Methodology
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/64">
+            Practical writing on POPIA-aware AI workflows, human approval, data readiness,
+            and the operating discipline needed before automation touches clients.
+          </p>
         </div>
-    );
+
+        <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <Link href={`/insights/${post.slug}`} key={post.slug} className="group">
+              <article className="flex min-h-[320px] flex-col rounded-md border border-ink/12 bg-white p-7 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-blueprint/40 group-hover:shadow-xl group-hover:shadow-ink/8">
+                <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.12em] text-ink/42">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="h-3.5 w-3.5" />
+                    {new Date(post.date).toLocaleDateString()}
+                  </span>
+                  <span className="h-1 w-1 rounded-full bg-ink/20" />
+                  <span className="flex items-center gap-1.5">
+                    <BookOpen className="h-3.5 w-3.5" />
+                    {post.readingTime}
+                  </span>
+                </div>
+                <h2 className="mt-12 text-2xl font-semibold leading-tight text-ink transition-colors group-hover:text-blueprint">
+                  {post.title}
+                </h2>
+                <p className="mt-4 flex-1 text-sm leading-7 text-ink/62">{post.excerpt}</p>
+                <div className="mt-8 flex items-center text-xs font-black uppercase tracking-[0.16em] text-coral transition-transform group-hover:translate-x-1">
+                  Read article
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </div>
+              </article>
+            </Link>
+          ))}
+        </div>
+
+        {posts.length === 0 && (
+          <div className="mt-16 rounded-md border border-ink/12 bg-white py-20 text-center">
+            <BookOpen className="mx-auto mb-4 h-12 w-12 text-ink/22" />
+            <h3 className="text-xl font-semibold text-ink">No insights published yet.</h3>
+            <p className="mt-2 text-ink/54">Check back soon for practical AI workflow notes.</p>
+          </div>
+        )}
+      </main>
+
+      <Footer />
+    </div>
+  );
 }

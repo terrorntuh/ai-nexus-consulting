@@ -1,0 +1,11 @@
+priority,company,email,subject,draft_source,status,send_channel,send_date,follow_up_date,reply_status,notes
+1,Ledger Ease,admin@ledgerease.co.za,AI admin assistant idea for Ledger Ease,email-drafts-accounting-batch-001.md#9,draft_ready,Zoho Mail,,,,"Strongest first send: explicit bookkeeping/admin support fit"
+2,JBMN Chartered Accountants,info@jbmnca.co.za,AI workflow for monthly financial performance reports,email-drafts-accounting-batch-001.md#10,draft_ready,Zoho Mail,,,,"Strong reporting fit; likely understands recurring SME reports"
+3,Page Accounting,Info@pageaccounting.co.za,AI-assisted management accounting drafts,email-drafts-accounting-batch-001.md#8,draft_ready,Zoho Mail,,,,"Management accounting angle is specific and practical"
+4,Ishmut Accounting,info@ishmutaccounting.co.za,Workflow idea for Ishmut Accounting,email-drafts-accounting-batch-001.md#6,draft_ready,Zoho Mail,,,,"Clean SME services fit; Cape Town"
+5,Freon Accounting Services,info@freonservices.co.za,Quick AI workflow idea for Freon Accounting,email-drafts-accounting-batch-001.md#1,draft_ready,Zoho Mail,,,,"Good broad SME fit; mention Sunninghill/Sandton if personalizing"
+6,TaxCorp,wiaan@taxcorp.co.za,AI idea for management statements and client follow-ups,email-drafts-accounting-batch-001.md#2,draft_ready,Zoho Mail,,,,"Send only after first 5 if DNS is clean"
+7,Afronity Chartered Accountants,accountant@afronity.co.za,Client document intake workflow for Afronity,email-drafts-accounting-batch-001.md#3,draft_ready,Zoho Mail,,,,"Good document-intake angle"
+8,Fenns Incorporated,office@fenns.co.za,Audit-prep workflow idea for Fenns,email-drafts-accounting-batch-001.md#7,draft_ready,Zoho Mail,,,,"More established firm; slightly more formal tone"
+9,Mrema Accounting Firm,info@mrema.co.za,AI-assisted SARS query and client follow-up workflow,email-drafts-accounting-batch-001.md#5,draft_ready,Zoho Mail,,,,"Could also WhatsApp/call if no reply"
+10,PKM Chartered Accountants,info@pkmafrica.com,AI workflow idea for PKM advisory/reporting,email-drafts-accounting-batch-001.md#4,draft_ready,Zoho Mail,,,,"Advisory/internal knowledge angle"
