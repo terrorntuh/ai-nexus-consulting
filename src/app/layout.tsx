@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ainexusconsulting.co.za"),
   title: "AI Nexus Consulting | Human-Loop AI Systems in South Africa",
   description:
-    "South Africa-based AI consulting for practical human-in-the-loop automation, POPIA-aware workflows, data cleanup, reporting, and support copilots.",
+    "South Africa-based AI consulting for practical human-reviewed workflows, POPIA-aware automation, data cleanup, reporting, and client delivery systems.",
   keywords: ["AI consulting", "South Africa", "POPIA", "human in the loop AI", "workflow automation"],
   openGraph: {
     title: "AI Nexus Consulting",
