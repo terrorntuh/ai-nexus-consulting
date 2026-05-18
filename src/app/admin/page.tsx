@@ -234,6 +234,7 @@ function Dashboard() {
     const [clients, setClients] = useState<PortalClient[]>([]);
     const [newClientName, setNewClientName] = useState('');
     const [newClientEmail, setNewClientEmail] = useState('');
+    const [newClientTempPassword, setNewClientTempPassword] = useState('');
     const [isCreatingClient, setIsCreatingClient] = useState(false);
 
     // Document Upload State
@@ -252,11 +253,12 @@ function Dashboard() {
         e.preventDefault();
         setIsCreatingClient(true);
         try {
-            await createPortalClient(newClientEmail, newClientName);
+            await createPortalClient(newClientEmail, newClientName, newClientTempPassword || undefined);
             const updated = await fetchClients();
             setClients(updated);
             setNewClientName('');
             setNewClientEmail('');
+            setNewClientTempPassword('');
         } catch (e) {
             console.error(e);
             alert("Failed to create client. Check console.");
@@ -595,6 +597,18 @@ function Dashboard() {
                                                 onChange={e => setNewClientEmail(e.target.value)}
                                                 required
                                                 className="bg-charcoal/50 border-white/10 text-white"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-xs uppercase text-white/50 tracking-wider">Temporary Password</label>
+                                            <Input
+                                                type="password"
+                                                value={newClientTempPassword}
+                                                onChange={e => setNewClientTempPassword(e.target.value)}
+                                                minLength={8}
+                                                placeholder="Leave blank to use env default"
+                                                autoComplete="new-password"
+                                                className="bg-charcoal/50 border-white/10 text-white placeholder:text-white/30"
                                             />
                                         </div>
                                         <Button type="submit" disabled={isCreatingClient} className="w-full bg-gold text-charcoal hover:bg-gold/80">
