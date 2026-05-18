@@ -17,6 +17,13 @@
   --color-blueprint: #245cff;
   --color-coral: #ff6a3d;
   --color-mint: #13b981;
+  --color-charcoal: #10131a;
+  --color-charcoal-light: #171c26;
+  --color-gold: #f5c542;
+  --color-gold-light: #ffe28a;
+  --color-pink: #e93b7a;
+  --color-pink-light: #ff6aa1;
+  --color-emerald: #13b981;
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
@@ -494,6 +501,54 @@
 
 ::selection {
   background: rgba(36, 92, 255, 0.18);
+}
+
+@layer components {
+  .glass {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.065);
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(22px);
+  }
+
+  .glass-gold {
+    border: 1px solid rgba(245, 197, 66, 0.16);
+    background: rgba(245, 197, 66, 0.08);
+    box-shadow: 0 18px 48px rgba(245, 197, 66, 0.08);
+    backdrop-filter: blur(20px);
+  }
+
+  .glass-pink {
+    border: 1px solid rgba(233, 59, 122, 0.16);
+    background: rgba(233, 59, 122, 0.08);
+    box-shadow: 0 18px 48px rgba(233, 59, 122, 0.08);
+    backdrop-filter: blur(20px);
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #fff2b3 0%, #f5c542 45%, #ff8f6a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+[data-slot="card"].glass,
+[data-slot="card"].glass-gold,
+[data-slot="card"].glass-pink {
+  background: rgba(255, 255, 255, 0.065) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #fff;
+}
+
+[data-slot="card"].glass-gold {
+  background: rgba(245, 197, 66, 0.08) !important;
+  border-color: rgba(245, 197, 66, 0.16) !important;
+}
+
+[data-slot="card"].glass-pink {
+  background: rgba(233, 59, 122, 0.08) !important;
+  border-color: rgba(233, 59, 122, 0.16) !important;
 }
 
 @media (max-width: 1024px) {

@@ -10,7 +10,6 @@ import {
     TrendingUp,
     Users,
     ShieldAlert,
-    DollarSign,
     Zap,
     HeartHandshake,
     Lock,
@@ -138,10 +137,10 @@ function formatTokens(n: number): string {
 
 function getScoreBadge(score: number | null) {
     if (score === null) return <Badge variant="outline" className="border-white/10 text-white/30 text-[10px]">Analyzing...</Badge>;
-    if (score >= 90) return <Badge variant="outline" className="border-emerald/20 bg-emerald/10 text-emerald text-[10px]">🔥 Hot Lead</Badge>;
-    if (score >= 70) return <Badge variant="outline" className="border-gold/20 bg-gold/10 text-gold text-[10px]">⭐ Warm Lead</Badge>;
-    if (score >= 40) return <Badge variant="outline" className="border-blue-400/20 bg-blue-400/10 text-blue-400 text-[10px]">👀 Curious</Badge>;
-    return <Badge variant="outline" className="border-red-400/20 bg-red-400/10 text-red-400 text-[10px]">❄️ Cold</Badge>;
+    if (score >= 90) return <Badge variant="outline" className="border-emerald/20 bg-emerald/10 text-emerald text-[10px]">Hot lead</Badge>;
+    if (score >= 70) return <Badge variant="outline" className="border-gold/20 bg-gold/10 text-gold text-[10px]">Warm lead</Badge>;
+    if (score >= 40) return <Badge variant="outline" className="border-blue-400/20 bg-blue-400/10 text-blue-400 text-[10px]">Curious</Badge>;
+    return <Badge variant="outline" className="border-red-400/20 bg-red-400/10 text-red-400 text-[10px]">Cold</Badge>;
 }
 
 // ─── Dashboard ─── //
@@ -198,32 +197,66 @@ function Dashboard() {
     };
 
     // ─── Stats Config ─── //
+    const recentLeads = metrics?.recentLeads ?? [];
+    const warmRecentLeads = recentLeads.filter((lead) => (lead.score ?? 0) >= 70).length;
+    const newReviewItems = recentLeads.filter((lead) => lead.status === 'new').length;
+
     const stats = [
         {
-            label: "Total Tokens",
+            label: "Lead intelligence",
             value: metrics ? formatTokens(metrics.totalTokens) : '—',
-            icon: Zap,
-            color: "text-gold",
-        },
-        {
-            label: "API Spend",
-            value: metrics ? `$${metrics.apiSpend.toFixed(2)}` : '—',
-            icon: DollarSign,
-            color: "text-emerald",
-        },
-        {
-            label: "Lead Funnel",
-            value: metrics ? metrics.leadCount.toString() : '—',
             icon: Users,
             color: "text-pink",
         },
         {
-            label: "API Requests",
+            label: "Human review queue",
+            value: metrics ? `$${metrics.apiSpend.toFixed(2)}` : '—',
+            icon: HeartHandshake,
+            color: "text-gold",
+        },
+        {
+            label: "AI usage pulse",
+            value: metrics ? metrics.leadCount.toString() : '—',
+            icon: Zap,
+            color: "text-emerald",
+        },
+        {
+            label: "Guarded events",
             value: metrics ? metrics.rateLimitHits.toString() : '—',
             icon: ShieldAlert,
             color: "text-red-500",
         },
-    ];
+    ].map((stat) => {
+        if (stat.label === "Lead intelligence") {
+            return {
+                ...stat,
+                value: metrics ? metrics.leadCount.toString() : '---',
+                detail: `${warmRecentLeads} warm or hot in recent signals`,
+            };
+        }
+
+        if (stat.label === "Human review queue") {
+            return {
+                ...stat,
+                value: metrics ? newReviewItems.toString() : '---',
+                detail: "AI drafts stay approval-first",
+            };
+        }
+
+        if (stat.label === "AI usage pulse") {
+            return {
+                ...stat,
+                value: metrics ? formatTokens(metrics.totalTokens) : '---',
+                detail: "Tokens used across site demos",
+            };
+        }
+
+        return {
+            ...stat,
+            value: metrics ? metrics.rateLimitHits.toString() : '---',
+            detail: "Rate limits and abuse signals",
+        };
+    });
 
     const hourlyTokens = metrics?.hourlyTokens || Array(24).fill(0);
     const maxToken = Math.max(...hourlyTokens, 1);
@@ -298,11 +331,12 @@ function Dashboard() {
                             <ArrowLeft className="w-4 h-4" />
                         </Link>
                         <div>
-                            <h1 className="text-2xl font-bold tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-                                Control Panel <span className="text-white/15 text-lg">v2.1</span>
+                            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-gold/70">AI Nexus operations</p>
+                            <h1 className="mt-1 text-2xl font-bold tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                                Command Desk <span className="text-white/20 text-lg">pilot</span>
                             </h1>
-                            <p className="text-white/30 text-xs">
-                                {metrics ? 'Live data from Supabase' : 'Connecting to database...'}
+                            <p className="mt-1 text-white/45 text-xs">
+                                {metrics ? 'Live Supabase signals for outreach, client portal, and model routing.' : 'Connecting to database...'}
                             </p>
                         </div>
                     </div>
@@ -310,24 +344,25 @@ function Dashboard() {
                         <Button
                             variant="outline"
                             size="sm"
-                            className="border-white/10 text-white/40 hover:text-gold hover:border-gold/20"
+                            className="border-white/10 bg-white/5 text-white/60 hover:bg-white/10 hover:text-gold hover:border-gold/20"
                             onClick={fetchMetrics}
                             disabled={loading}
                         >
                             <RefreshCw className={`w-3.5 h-3.5 mr-2 ${loading ? 'animate-spin' : ''}`} />
                             Refresh
                         </Button>
-                        <Badge variant="outline" className="border-emerald/20 text-emerald bg-emerald/5 text-[10px]">Network Healthy</Badge>
-                        <Badge variant="outline" className="border-pink/20 text-pink bg-pink/5 text-[10px]">POPIA Active</Badge>
+                        <Badge variant="outline" className="border-emerald/20 text-emerald bg-emerald/5 text-[10px]">Supabase live</Badge>
+                        <Badge variant="outline" className="border-gold/20 text-gold bg-gold/5 text-[10px]">Human approved</Badge>
+                        <Badge variant="outline" className="border-pink/20 text-pink bg-pink/5 text-[10px]">POPIA aware</Badge>
                     </div>
                 </div>
 
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                    <TabsList className="glass border-white/5 mb-8">
-                        <TabsTrigger value="overview" className="data-[state=active]:bg-gold data-[state=active]:text-charcoal text-white/60">
-                            Overview
+                    <TabsList className="glass !bg-white/5 border-white/5 mb-8 h-auto p-1">
+                        <TabsTrigger value="overview" className="data-[state=active]:!bg-gold data-[state=active]:!text-charcoal !text-white/60 hover:!text-white">
+                            Operating Desk
                         </TabsTrigger>
-                        <TabsTrigger value="clients" className="data-[state=active]:bg-gold data-[state=active]:text-charcoal text-white/60">
+                        <TabsTrigger value="clients" className="data-[state=active]:!bg-gold data-[state=active]:!text-charcoal !text-white/60 hover:!text-white">
                             Client Portal
                         </TabsTrigger>
                     </TabsList>
@@ -352,6 +387,7 @@ function Dashboard() {
                                             <div className="mt-4">
                                                 <div className="text-2xl font-bold tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>{stat.value}</div>
                                                 <div className="text-[10px] text-white/30 uppercase tracking-widest font-medium mt-1">{stat.label}</div>
+                                                <p className="mt-3 text-[11px] leading-5 text-white/45">{stat.detail}</p>
                                             </div>
                                         </CardContent>
                                     </Card>
@@ -365,8 +401,11 @@ function Dashboard() {
                                 <CardHeader>
                                     <CardTitle className="text-xs font-bold uppercase tracking-widest text-white/40 flex items-center gap-2">
                                         <TrendingUp className="w-4 h-4" />
-                                        Token Consumption (Last 24h)
+                                        AI usage pulse
                                     </CardTitle>
+                                    <CardDescription className="text-white/35 text-[11px]">
+                                        Token flow from the public demos and lead analysis endpoints.
+                                    </CardDescription>
                                 </CardHeader>
                                 <CardContent>
                                     <div className="h-[280px] flex items-end gap-0.5 pt-4">
@@ -392,17 +431,17 @@ function Dashboard() {
                                 </CardContent>
                             </Card>
 
-                            {/* Grandma Metric */}
+                            {/* Human Review Posture */}
                             <Card className="glass border-gold/10 relative overflow-hidden">
                                 <div className="absolute top-0 right-0 p-4">
                                     <HeartHandshake className="w-16 h-16 text-gold/[0.03]" />
                                 </div>
                                 <CardHeader>
                                     <CardTitle className="text-xs font-bold uppercase tracking-widest text-gold flex items-center gap-2">
-                                        The Grandma Metric
+                                        Human-in-loop posture
                                     </CardTitle>
                                     <CardDescription className="text-white/30 text-[11px]">
-                                        AI clarity audit — &quot;Plain English&quot; toggle usage.
+                                        AI scores, drafts, and summarizes. A person still decides what goes out.
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent className="space-y-6">
@@ -414,20 +453,20 @@ function Dashboard() {
                                             className="text-6xl font-black text-gradient-gold inline-block"
                                             style={{ fontFamily: 'var(--font-heading)' }}
                                         >
-                                            82%
+                                            Review
                                         </motion.div>
-                                        <div className="text-[10px] text-white/30 font-bold uppercase mt-2 tracking-widest">Clarity Score</div>
+                                        <div className="text-[10px] text-white/30 font-bold uppercase mt-2 tracking-widest">Current mode</div>
                                     </div>
                                     <div className="space-y-4">
                                         <div className="space-y-1.5">
                                             <div className="flex justify-between text-[10px] uppercase font-bold text-white/40">
-                                                <span>Jargon Simplified</span>
-                                                <span>1,242 items</span>
+                                                <span>Auto-send status</span>
+                                                <span>Off</span>
                                             </div>
                                             <div className="h-2 bg-white/5 rounded-full overflow-hidden">
                                                 <motion.div
                                                     initial={{ width: 0 }}
-                                                    animate={{ width: '82%' }}
+                                                    animate={{ width: '100%' }}
                                                     transition={{ duration: 1, delay: 0.5 }}
                                                     className="h-full bg-gradient-to-r from-gold to-gold-light rounded-full"
                                                 />
@@ -435,7 +474,7 @@ function Dashboard() {
                                         </div>
                                         <div className="p-3 glass-gold rounded-xl">
                                             <p className="text-[10px] text-gold/80 font-medium leading-relaxed italic">
-                                                &quot;High Trust. Users navigate the Query Doctor without excessive toggle resets.&quot;
+                                                &quot;AI prepares the work; Ntuh approves the client-facing move.&quot;
                                             </p>
                                         </div>
                                     </div>
@@ -447,10 +486,10 @@ function Dashboard() {
                                 <CardHeader>
                                     <CardTitle className="text-xs font-bold uppercase tracking-widest text-white/40 flex items-center gap-2">
                                         <Cpu className="w-4 h-4" />
-                                        AI Routing Engine
+                                        Model routing
                                     </CardTitle>
                                     <CardDescription className="text-white/30 text-[11px]">
-                                        Dynamically switch active models per feature.
+                                        Choose the model behind the public demos and lead review tools.
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
@@ -508,7 +547,7 @@ function Dashboard() {
                                 <CardHeader>
                                     <CardTitle className="text-xs font-bold uppercase tracking-widest text-white/40 flex items-center gap-2">
                                         <Users className="w-4 h-4" />
-                                        Recent Leads
+                                        Website lead intelligence
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent>
@@ -572,10 +611,10 @@ function Dashboard() {
                                 <CardHeader>
                                     <CardTitle className="text-xl font-bold text-white flex items-center gap-2">
                                         <Building2 className="w-5 h-5 text-gold" />
-                                        Provision New Enterprise Client
+                                        Create client workspace
                                     </CardTitle>
                                     <CardDescription className="text-white/40">
-                                        Generates a Supabase Auth account and links them to the Client Portal. The initial password is provided by the private deployment environment or entered manually.
+                                        Provision a secure Supabase Auth login for a discovery call, pilot, or active AI workflow project.
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
@@ -590,7 +629,7 @@ function Dashboard() {
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-xs uppercase text-white/50 tracking-wider">Exec Email</label>
+                                            <label className="text-xs uppercase text-white/50 tracking-wider">Business Email</label>
                                             <Input
                                                 type="email"
                                                 value={newClientEmail}
@@ -612,7 +651,7 @@ function Dashboard() {
                                             />
                                         </div>
                                         <Button type="submit" disabled={isCreatingClient} className="w-full bg-gold text-charcoal hover:bg-gold/80">
-                                            {isCreatingClient ? "Provisioning..." : "Create Secure Account"}
+                                            {isCreatingClient ? "Provisioning..." : "Create Portal Account"}
                                         </Button>
                                     </form>
                                 </CardContent>
@@ -622,10 +661,10 @@ function Dashboard() {
                                 <CardHeader>
                                     <CardTitle className="text-xl font-bold text-white flex items-center gap-2">
                                         <Save className="w-5 h-5 text-gold" />
-                                        Secure Document Delivery
+                                        Deliver reviewed artifacts
                                     </CardTitle>
                                     <CardDescription className="text-white/40">
-                                        Upload NDAs, architecture diagrams, and ROI PDFs directly to a specific client&apos;s secure vault.
+                                        Upload proposals, workflow maps, ROI notes, and handover files into the client&apos;s private workspace.
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
@@ -667,7 +706,7 @@ function Dashboard() {
                                             />
                                         </div>
                                         <Button type="submit" disabled={isUploading || clients.length === 0} className="w-full bg-white/10 text-white hover:bg-white/20 border-white/10 border">
-                                            {isUploading ? "Encrypting & Uploading..." : "Upload to Client Portal"}
+                                            {isUploading ? "Uploading..." : "Upload to Client Portal"}
                                         </Button>
                                     </form>
                                 </CardContent>
