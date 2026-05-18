@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import {
   ArrowRight,
   BadgeCheck,
-  Bot,
   CheckCircle2,
   ClipboardCheck,
   DatabaseZap,
@@ -38,7 +37,7 @@ const operatingPrinciples = [
 const useCases = [
   {
     icon: MessageSquareText,
-    title: 'Support Copilot',
+    title: 'Support Drafting Desk',
     description:
       'Drafts WhatsApp, email, and portal replies from your policies and previous cases. Your team approves before anything is sent.',
     result: 'Faster replies without surrendering the customer relationship.',
@@ -75,7 +74,7 @@ const buildPath = [
   {
     step: '02',
     title: 'Prototype with your actual messy inputs',
-    copy: 'We use your documents, spreadsheets, forms, and examples so the demo reflects the real operating environment.',
+    copy: 'We use your documents, spreadsheets, forms, and examples so the workflow reflects the real operating environment.',
   },
   {
     step: '03',
@@ -114,7 +113,7 @@ export default function Home() {
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-ink/68 md:text-xl">
               AI Nexus builds human-in-the-loop automation for South African businesses:
-              practical copilots, cleaner data, faster reporting, and secure workflows that
+              practical workflow assistants, cleaner data, faster reporting, and secure workflows that
               keep people accountable.
             </p>
 
@@ -131,7 +130,7 @@ export default function Home() {
                 variant="outline"
                 className="h-13 rounded-md border-ink/15 bg-white/60 px-6 text-ink hover:bg-white"
               >
-                <a href="#demo">
+                <a href="#approach">
                   <Play className="mr-2 h-4 w-4" />
                   See the approach
                 </a>
@@ -172,7 +171,7 @@ export default function Home() {
 
                   <div className="decision-flow" aria-hidden="true">
                     <div>
-                      <Bot className="h-5 w-5" />
+                      <FileText className="h-5 w-5" />
                       Draft
                     </div>
                     <div>
@@ -243,7 +242,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="demo" className="section-shell bg-stone">
+      <section id="approach" className="section-shell bg-stone">
         <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="section-heading mx-0 max-w-xl text-left">
             <p>The pitch, sharper</p>

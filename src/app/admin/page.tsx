@@ -17,8 +17,8 @@ import {
     RefreshCw,
     Mail,
     Building2,
-    Settings,
-    Cpu,
+    ClipboardList,
+    CheckCircle2,
     Save
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -43,13 +43,6 @@ interface Metrics {
         draft_reply: string | null;
         created_at: string;
     }>;
-}
-
-interface AIModelSetting {
-    feature_name: string;
-    provider: string;
-    model_id: string;
-    updated_at: string;
 }
 
 interface PortalClient {
@@ -148,9 +141,7 @@ function getScoreBadge(score: number | null) {
 // ─── Dashboard ─── //
 function Dashboard() {
     const [metrics, setMetrics] = useState<Metrics | null>(null);
-    const [models, setModels] = useState<AIModelSetting[]>([]);
     const [loading, setLoading] = useState(true);
-    const [savingModel, setSavingModel] = useState<string | null>(null);
     const [selectedLead, setSelectedLead] = useState<Metrics['recentLeads'][0] | null>(null);
 
     // ─── Metrics Fetching ─── //
@@ -165,11 +156,6 @@ function Dashboard() {
 
             setMetrics(data);
 
-            const modRes = await fetch('/api/admin/models');
-            if (modRes.ok) {
-                const modData = await modRes.json();
-                if (modData.settings) setModels(modData.settings);
-            }
         } catch (err) {
             console.error('Failed to fetch metrics:', err);
         }
@@ -181,22 +167,6 @@ function Dashboard() {
         const interval = setInterval(fetchMetrics, 30000);
         return () => clearInterval(interval);
     }, []);
-
-    // ─── Model Setting Update ─── //
-    const handleModelChange = async (feature_name: string, provider: string, model_id: string) => {
-        setSavingModel(feature_name);
-        try {
-            await fetch('/api/admin/models', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ feature_name, provider, model_id })
-            });
-            await fetchMetrics();
-        } catch (e) {
-            console.error("Failed to update model", e);
-        }
-        setSavingModel(null);
-    };
 
     // ─── Stats Config ─── //
     const recentLeads = metrics?.recentLeads ?? [];
@@ -217,7 +187,7 @@ function Dashboard() {
             color: "text-gold",
         },
         {
-            label: "AI usage pulse",
+            label: "Review workload",
             value: metrics ? metrics.leadCount.toString() : '—',
             icon: Zap,
             color: "text-emerald",
@@ -245,11 +215,11 @@ function Dashboard() {
             };
         }
 
-        if (stat.label === "AI usage pulse") {
+        if (stat.label === "Review workload") {
             return {
                 ...stat,
                 value: metrics ? formatTokens(metrics.totalTokens) : '---',
-                detail: "Tokens used across site demos",
+                detail: "Measured assistance work behind reviews",
             };
         }
 
@@ -338,7 +308,7 @@ function Dashboard() {
                                 Command Desk <span className="text-white/20 text-lg">pilot</span>
                             </h1>
                             <p className="mt-1 text-white/45 text-xs">
-                                {metrics ? 'Live Supabase signals for outreach, client portal, and model routing.' : 'Connecting to database...'}
+                                {metrics ? 'Live Supabase signals for outreach, client portal, and delivery.' : 'Connecting to database...'}
                             </p>
                         </div>
                     </div>
@@ -403,10 +373,10 @@ function Dashboard() {
                                 <CardHeader>
                                     <CardTitle className="text-xs font-bold uppercase tracking-widest text-white/40 flex items-center gap-2">
                                         <TrendingUp className="w-4 h-4" />
-                                        AI usage pulse
+                                        Review workload
                                     </CardTitle>
                                     <CardDescription className="text-white/35 text-[11px]">
-                                        Token flow from the public demos and lead analysis endpoints.
+                                        Activity from lead scoring, draft preparation, and admin review.
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
@@ -420,7 +390,7 @@ function Dashboard() {
                                                 className="flex-1 bg-gradient-to-t from-gold/10 to-gold/60 rounded-t-sm relative group cursor-pointer"
                                             >
                                                 <div className="absolute -top-8 left-1/2 -translate-x-1/2 glass px-2 py-1 rounded text-[9px] text-gold font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
-                                                    {hourlyTokens[i].toLocaleString()} tokens
+                                                    {hourlyTokens[i].toLocaleString()} review units
                                                 </div>
                                             </motion.div>
                                         ))}
@@ -483,62 +453,53 @@ function Dashboard() {
                                 </CardContent>
                             </Card>
 
-                            {/* AI Config Switcher */}
+                            {/* Delivery Board */}
                             <Card className="glass border-white/5 relative overflow-hidden">
                                 <CardHeader>
                                     <CardTitle className="text-xs font-bold uppercase tracking-widest text-white/40 flex items-center gap-2">
-                                        <Cpu className="w-4 h-4" />
-                                        Model routing
+                                        <ClipboardList className="w-4 h-4" />
+                                        Delivery board
                                     </CardTitle>
                                     <CardDescription className="text-white/30 text-[11px]">
-                                        Choose the model behind the public demos and lead review tools.
+                                        Keep the business focused on outreach, reviewed work, and client handover.
                                     </CardDescription>
                                 </CardHeader>
-                                <CardContent className="space-y-4">
-                                    {models.length === 0 ? (
-                                        <div className="text-center text-white/40 text-xs py-4">No settings found.</div>
-                                    ) : (
-                                        models.map((model) => (
-                                            <div key={model.feature_name} className="p-3 glass rounded-xl border border-white/5 space-y-3">
-                                                <div className="flex items-center justify-between">
-                                                    <div className="text-xs font-bold text-white uppercase tracking-widest flex items-center gap-2">
-                                                        <Settings className="w-3.5 h-3.5 text-white/50" />
-                                                        {model.feature_name.replace('_', ' ')}
-                                                    </div>
-                                                    <Badge variant="outline" className="text-[9px] border-white/10 text-white/40 uppercase bg-charcoal/50">
-                                                        {model.provider}
-                                                    </Badge>
+                                <CardContent className="space-y-3">
+                                    {[
+                                        {
+                                            title: 'Outreach desk',
+                                            value: `${recentLeads.length} recent signals`,
+                                            copy: 'Track replies, bounces, and follow-ups before sending the next batch.',
+                                        },
+                                        {
+                                            title: 'Client workspace',
+                                            value: `${clients.length} active portal${clients.length === 1 ? '' : 's'}`,
+                                            copy: 'Deliver roadmaps, workflow notes, and reviewed files in one secure place.',
+                                        },
+                                        {
+                                            title: 'Approval queue',
+                                            value: `${newReviewItems} new item${newReviewItems === 1 ? '' : 's'}`,
+                                            copy: 'No client-facing action leaves the desk without a human owner.',
+                                        },
+                                    ].map((item) => (
+                                        <div key={item.title} className="p-3 glass rounded-xl border border-white/5">
+                                            <div className="flex items-center justify-between gap-3">
+                                                <div className="text-xs font-bold text-white uppercase tracking-widest flex items-center gap-2">
+                                                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald" />
+                                                    {item.title}
                                                 </div>
-                                                <div className="relative">
-                                                    <select
-                                                        className="w-full bg-charcoal/80 border border-white/10 rounded-lg p-2 text-xs text-white appearance-none focus:outline-none focus:border-gold/30 disabled:opacity-50"
-                                                        value={model.model_id}
-                                                        disabled={savingModel === model.feature_name}
-                                                        onChange={(e) => {
-                                                            const provider = e.target.value.includes('gpt') ? 'openai' : 'google';
-                                                            handleModelChange(model.feature_name, provider, e.target.value);
-                                                        }}
-                                                    >
-                                                        <optgroup label="Google (Free/Fast)">
-                                                            <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
-                                                            <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
-                                                        </optgroup>
-                                                        <optgroup label="OpenAI (Premium)">
-                                                            <option value="gpt-4o-mini">GPT-4o Mini</option>
-                                                            <option value="gpt-4o">GPT-4o</option>
-                                                        </optgroup>
-                                                    </select>
-                                                    <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                                                        {savingModel === model.feature_name ? (
-                                                            <RefreshCw className="w-3.5 h-3.5 text-gold animate-spin" />
-                                                        ) : (
-                                                            <Save className="w-3.5 h-3.5 text-white/20" />
-                                                        )}
-                                                    </div>
-                                                </div>
+                                                <Badge variant="outline" className="text-[9px] border-gold/15 text-gold bg-gold/5 uppercase">
+                                                    {item.value}
+                                                </Badge>
                                             </div>
-                                        ))
-                                    )}
+                                            <p className="mt-2 text-[11px] leading-5 text-white/40">{item.copy}</p>
+                                        </div>
+                                    ))}
+                                    <div className="p-3 glass-gold rounded-xl">
+                                        <p className="text-[10px] text-gold/80 font-medium leading-relaxed">
+                                            Best next move: review replies, log outcomes, then send only the follow-ups that still feel high-fit.
+                                        </p>
+                                    </div>
                                 </CardContent>
                             </Card>
                         </div>

@@ -42,7 +42,7 @@ export function ConsentBanner() {
                             <div className="space-y-2">
                                 <h3 className="font-black text-ink uppercase tracking-[0.16em] text-xs">Privacy & Compliance</h3>
                                 <p className="text-xs text-ink/62 leading-relaxed">
-                                    We value your digital sovereignty. By using our demos, you consent to POPIA-aware data handling for usage logs and lead generation.
+                                    We value your digital sovereignty. By using this site, you consent to POPIA-aware handling for contact forms, usage logs, and lead follow-up.
                                 </p>
                                 <div className="pt-2">
                                     <Button

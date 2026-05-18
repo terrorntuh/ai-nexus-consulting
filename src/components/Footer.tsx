@@ -3,7 +3,7 @@ import { ContactForm } from '@/components/ContactForm';
 
 const links = [
   { label: 'Services', href: '/#services' },
-  { label: 'Approach', href: '/#demo' },
+  { label: 'Approach', href: '/#approach' },
   { label: 'Process', href: '/#process' },
   { label: 'Pricing', href: '/#pricing' },
   { label: 'Insights', href: '/insights' },
