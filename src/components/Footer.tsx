@@ -52,9 +52,9 @@ export function Footer() {
                 <MapPin className="h-4 w-4 text-coral" />
                 Johannesburg, South Africa
               </span>
-              <a href="mailto:hello@ainexusconsulting.co.za" className="flex items-center gap-2 hover:text-ink">
+              <a href="mailto:sales@ainexusconsulting.co.za" className="flex items-center gap-2 hover:text-ink">
                 <Mail className="h-4 w-4 text-coral" />
-                hello@ainexusconsulting.co.za
+                sales@ainexusconsulting.co.za
               </a>
               <span className="flex items-center gap-2 text-mint">
                 <ShieldCheck className="h-4 w-4" />
