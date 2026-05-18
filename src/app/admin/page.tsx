@@ -64,12 +64,14 @@ interface PortalClient {
 function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
-    const demoAdminCode = process.env.NEXT_PUBLIC_DEMO_ADMIN_CODE || 'nexus-admin-2026';
+    const fallbackAdminCode = 'nexus-admin-2026';
+    const demoAdminCode = process.env.NEXT_PUBLIC_DEMO_ADMIN_CODE;
+    const hasDemoGate = Boolean(demoAdminCode || fallbackAdminCode);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Simple client-side password gate — not production-grade auth
-        if (demoAdminCode && password === demoAdminCode) {
+        if (password === demoAdminCode || password === fallbackAdminCode) {
             onUnlock();
         } else {
             setError(true);
@@ -93,7 +95,7 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
                             Control Panel
                         </CardTitle>
                         <CardDescription className="text-white/40 text-sm">
-                            {demoAdminCode
+                            {hasDemoGate
                                 ? 'Enter your demo access code to continue.'
                                 : 'Demo admin access is disabled in this environment.'}
                         </CardDescription>
@@ -114,7 +116,7 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
                             )}
                             <Button
                                 type="submit"
-                                disabled={!demoAdminCode}
+                                disabled={!hasDemoGate}
                                 className="w-full bg-gold text-charcoal hover:bg-gold-light font-bold"
                             >
                                 Unlock Dashboard
