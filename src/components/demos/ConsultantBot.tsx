@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport, isTextUIPart, type UIMessage } from 'ai';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -20,8 +21,9 @@ const suggestedStarters = [
 export function ConsultantBot() {
     const [input, setInput] = React.useState('');
     const { messages, sendMessage, status } = useChat({
-        // @ts-ignore - api property handling in this version
-        api: '/api/consultant-bot',
+        transport: new DefaultChatTransport({
+            api: '/api/consultant-bot',
+        }),
     });
 
     const isLoading = status === 'submitted' || status === 'streaming';
@@ -102,7 +104,7 @@ export function ConsultantBot() {
                         )}
 
                         <AnimatePresence>
-                            {messages.map((m: any) => (
+                            {messages.map((m: UIMessage) => (
                                 <motion.div
                                     key={m.id}
                                     initial={{ opacity: 0, y: 10 }}
@@ -118,7 +120,7 @@ export function ConsultantBot() {
                                         : 'bg-white/5 text-white rounded-tl-none'
                                         }`}>
                                         <p className="text-sm leading-relaxed">
-                                            {m.parts?.filter((p: any) => p.type === 'text').map((p: any) => p.text).join('') || m.content}
+                                            {m.parts.filter(isTextUIPart).map((p) => p.text).join('')}
                                         </p>
                                     </div>
                                 </motion.div>

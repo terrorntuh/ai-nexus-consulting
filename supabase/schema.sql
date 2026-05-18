@@ -11,6 +11,11 @@ create table if not exists public.leads (
     name text not null,
     email text not null,
     company text,
+    message text not null,
+    status text default 'new' check (status in ('new', 'contacted', 'qualified', 'closed')),
+    score integer check (score between 0 and 100),
+    analysis text,
+    draft_reply text,
     sentiment text,
     source text default 'website_contact_form'
 );
@@ -60,6 +65,23 @@ as $$
   limit match_count;
 $$;
 
+create or replace function search_knowledge (
+  query_embedding vector(768),
+  match_threshold float,
+  match_count int
+)
+returns table (
+  id uuid,
+  content text,
+  metadata jsonb,
+  similarity float
+)
+language sql stable
+as $$
+  select *
+  from match_knowledge(query_embedding, match_threshold, match_count);
+$$;
+
 -- Create ai_settings table for Admin dynamic model switching
 create table if not exists public.ai_settings (
     feature_name text primary key,
@@ -77,6 +99,27 @@ on conflict (feature_name) do nothing;
 
 alter table public.ai_settings enable row level security;
 
+create table if not exists public.usage_logs (
+    id uuid default gen_random_uuid() primary key,
+    endpoint text not null,
+    tokens_used integer default 0 not null,
+    latency_ms integer default 0 not null,
+    ip_hash text,
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+alter table public.usage_logs enable row level security;
+
+create table if not exists public.conversations (
+    id uuid default gen_random_uuid() primary key,
+    session_id uuid not null,
+    role text not null check (role in ('user', 'assistant')),
+    content text not null,
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+alter table public.conversations enable row level security;
+
 
 -- Phase 3 Schema (Secure Client Portal)
 -- ==========================================
@@ -84,6 +127,7 @@ alter table public.ai_settings enable row level security;
 -- 1. Clients Table (Extends auth.users)
 create table if not exists public.clients (
     id uuid references auth.users on delete cascade primary key,
+    email text unique,
     company_name text not null,
     industry text,
     setup_status text default 'pending', -- pending, active, archived

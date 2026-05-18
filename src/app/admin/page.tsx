@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -50,6 +51,14 @@ interface AIModelSetting {
     provider: string;
     model_id: string;
     updated_at: string;
+}
+
+interface PortalClient {
+    id: string;
+    email: string | null;
+    company_name: string;
+    setup_status: string | null;
+    created_at: string;
 }
 
 // ─── Password Gate ─── //
@@ -125,13 +134,6 @@ function formatTokens(n: number): string {
     if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
     if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K`;
     return n.toString();
-}
-
-function getScoreColor(score: number | null) {
-    if (score === null) return 'text-white/20';
-    if (score >= 80) return 'text-emerald';
-    if (score >= 50) return 'text-gold';
-    return 'text-red-400';
 }
 
 function getScoreBadge(score: number | null) {
@@ -229,7 +231,7 @@ function Dashboard() {
     const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
 
     const [activeTab, setActiveTab] = useState('overview');
-    const [clients, setClients] = useState<any[]>([]);
+    const [clients, setClients] = useState<PortalClient[]>([]);
     const [newClientName, setNewClientName] = useState('');
     const [newClientEmail, setNewClientEmail] = useState('');
     const [isCreatingClient, setIsCreatingClient] = useState(false);
@@ -290,9 +292,9 @@ function Dashboard() {
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
-                        <a href="/" className="p-2 glass rounded-lg text-white/40 hover:text-gold transition-colors">
+                        <Link href="/" className="p-2 glass rounded-lg text-white/40 hover:text-gold transition-colors">
                             <ArrowLeft className="w-4 h-4" />
-                        </a>
+                        </Link>
                         <div>
                             <h1 className="text-2xl font-bold tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
                                 Control Panel <span className="text-white/15 text-lg">v2.1</span>
@@ -609,7 +611,7 @@ function Dashboard() {
                                         Secure Document Delivery
                                     </CardTitle>
                                     <CardDescription className="text-white/40">
-                                        Upload NDAs, architecture diagrams, and ROI PDFs directly to a specific client's secure vault.
+                                        Upload NDAs, architecture diagrams, and ROI PDFs directly to a specific client&apos;s secure vault.
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>

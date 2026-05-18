@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Activity, Play, CheckCircle2, AlertCircle, Calendar } from 'lucide-react';
 
 export function QueryDoctor() {
-    const [result, setResult] = useState<any>(null);
+    const [result, setResult] = useState<QueryDoctorResult | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -39,7 +39,7 @@ export function QueryDoctor() {
             // Strip markdown code blocks if Gemini wraps in ```json ... ```
             let cleaned = text.trim();
             cleaned = cleaned.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/i, '');
-            const parsed = JSON.parse(cleaned);
+            const parsed = JSON.parse(cleaned) as QueryDoctorResult;
             setResult(parsed);
         } catch (e) {
             console.error("Query Doctor error:", e);
@@ -206,4 +206,10 @@ export function QueryDoctor() {
             </div>
         </div>
     );
+}
+
+interface QueryDoctorResult {
+    optimized_sql: string;
+    explanation: string;
+    speed_improvement: number;
 }

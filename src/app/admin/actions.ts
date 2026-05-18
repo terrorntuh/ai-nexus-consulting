@@ -3,13 +3,21 @@
 import { createClient } from '@supabase/supabase-js';
 import { revalidatePath } from 'next/cache';
 
-// Use the service role key to bypass RLS for Admin operations
-const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function createSupabaseAdmin() {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!url || !serviceKey) {
+        throw new Error('Missing Supabase admin environment variables.');
+    }
+
+    return createClient(url, serviceKey, {
+        auth: { persistSession: false },
+    });
+}
 
 export async function fetchClients() {
+    const supabaseAdmin = createSupabaseAdmin();
     const { data: clients, error } = await supabaseAdmin
         .from('clients')
         .select('*')
@@ -20,6 +28,7 @@ export async function fetchClients() {
 }
 
 export async function createPortalClient(email: string, company_name: string, tempPassword?: string) {
+    const supabaseAdmin = createSupabaseAdmin();
     const initialPassword = tempPassword || process.env.DEFAULT_PORTAL_TEMP_PASSWORD;
     if (!initialPassword) {
         throw new Error('Missing DEFAULT_PORTAL_TEMP_PASSWORD. Set it in the private deployment environment.');
@@ -58,6 +67,7 @@ export async function createPortalClient(email: string, company_name: string, te
 }
 
 export async function uploadClientDocument(formData: FormData) {
+    const supabaseAdmin = createSupabaseAdmin();
     const file = formData.get('file') as File;
     const title = formData.get('title') as string;
     const description = formData.get('description') as string;

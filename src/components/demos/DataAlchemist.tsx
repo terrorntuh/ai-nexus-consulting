@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Textarea } from '@/components/ui/textarea';
 import { AIText } from '@/components/AIText';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Database, Play, CheckCircle2, FileJson, ArrowRightLeft } from 'lucide-react';
+import { Database, Play, FileJson, ArrowRightLeft } from 'lucide-react';
 
 export function DataAlchemist() {
     const [isTransforming, setIsTransforming] = useState(false);

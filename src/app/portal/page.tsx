@@ -121,12 +121,8 @@ export default async function PortalDashboard() {
                                             <Clock className="w-3.5 h-3.5" />
                                             {new Date(doc.uploaded_at).toLocaleDateString()}
                                         </div>
-                                        {/* 
-                                            In a real app, you would generate a signed URL from Supabase Storage here.
-                                            For now, we just link to a placeholder or the raw path.
-                                        */}
                                         <a
-                                            href={`#download-${doc.id}`}
+                                            href={`/api/portal/documents/${doc.id}/download`}
                                             className="flex items-center gap-2 text-sm text-gold hover:text-white font-bold transition-colors bg-gold/10 hover:bg-gold/20 px-3 py-1.5 rounded-md"
                                         >
                                             Download

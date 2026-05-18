@@ -20,7 +20,7 @@ export async function GET() {
         // ─── Token Usage (fault-tolerant) ─── //
         let totalTokens = 0;
         let rateLimitHits = 0;
-        let hourlyTokens = Array(24).fill(0);
+        const hourlyTokens = Array(24).fill(0);
 
         try {
             const { data: tokenData } = await supabase
@@ -44,7 +44,7 @@ export async function GET() {
                 const hour = new Date(row.created_at).getHours();
                 hourlyTokens[hour] += row.tokens_used || 0;
             });
-        } catch (e) {
+        } catch {
             console.warn('[METRICS] usage_logs unavailable, using defaults');
         }
 
@@ -64,7 +64,7 @@ export async function GET() {
                 .order('created_at', { ascending: false })
                 .limit(5);
             recentLeads = data || [];
-        } catch (e) {
+        } catch {
             console.warn('[METRICS] leads unavailable, using defaults');
         }
 

@@ -1,5 +1,5 @@
 import { google } from '@ai-sdk/google';
-import { streamText, type UIMessage, convertToModelMessages } from 'ai';
+import { streamText, type UIMessage, convertToModelMessages, isTextUIPart } from 'ai';
 import { createServerClient } from '@/lib/supabase';
 import crypto from 'crypto';
 
@@ -52,8 +52,8 @@ export async function POST(req: Request) {
                 const lastUserMsg = messages.filter(m => m.role === 'user').pop();
                 if (lastUserMsg) {
                     const textContent = lastUserMsg.parts
-                        ?.filter((p: any) => p.type === 'text')
-                        .map((p: any) => p.text)
+                        ?.filter(isTextUIPart)
+                        .map((p) => p.text)
                         .join('') || '';
 
                     if (textContent) {

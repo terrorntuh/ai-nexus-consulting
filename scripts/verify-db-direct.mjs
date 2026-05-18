@@ -16,7 +16,7 @@ try {
             env[key.trim()] = value.trim();
         }
     });
-} catch (e) {
+} catch {
     console.error('❌ Could not read .env.local');
     process.exit(1);
 }

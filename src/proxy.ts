@@ -12,7 +12,7 @@ const RATE_LIMIT_EXCLUDE = ['/api/admin/', '/api/leads'];
 
 export default async function proxy(request: NextRequest) {
     // 1. Supabase Session Management & Route Protection
-    let response = await updateSession(request);
+    const response = await updateSession(request);
 
     // 2. Rate Limiting for Public API Routes
     const ip = request.headers.get('x-forwarded-for') ?? '127.0.0.1';

@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Textarea } from '@/components/ui/textarea';
 import { AIText } from '@/components/AIText';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, Play, Lock, AlertTriangle, FileLock2 } from 'lucide-react';
+import { ShieldCheck, Play, Lock, FileLock2 } from 'lucide-react';
 
 export function ComplianceSentinel() {
     const [isScanning, setIsScanning] = useState(false);

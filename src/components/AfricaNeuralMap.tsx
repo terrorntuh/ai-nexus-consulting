@@ -63,6 +63,11 @@ const CONNECTIONS: [number, number][] = [
     [1, 5], // Lagos → Accra
 ];
 
+function seededUnit(seed: number) {
+    const value = Math.sin(seed * 12.9898) * 43758.5453;
+    return value - Math.floor(value);
+}
+
 function ContinentPoints() {
     const pointsRef = useRef<THREE.Points>(null!);
 
@@ -84,12 +89,14 @@ function ContinentPoints() {
 
         // Generate points inside the Africa polygon
         let generated = 0;
+        let attempts = 0;
         while (generated < count) {
-            const x = (Math.random() - 0.5) * 6;
-            const y = (Math.random() - 0.5) * 7;
+            attempts++;
+            const x = (seededUnit(attempts * 2) - 0.5) * 6;
+            const y = (seededUnit(attempts * 2 + 1) - 0.5) * 7;
 
             if (isInsidePolygon(x, y)) {
-                const z = (Math.random() - 0.5) * 0.3;
+                const z = (seededUnit(attempts * 3) - 0.5) * 0.3;
                 pts.push(x, y, z);
                 generated++;
             }
@@ -196,7 +203,7 @@ function ConnectionLines() {
                 const mid: [number, number, number] = [
                     (start[0] + end[0]) / 2,
                     (start[1] + end[1]) / 2,
-                    0.5 + Math.random() * 0.3,
+                    0.5 + seededUnit(i + 100) * 0.3,
                 ];
 
                 const curve = new THREE.QuadraticBezierCurve3(

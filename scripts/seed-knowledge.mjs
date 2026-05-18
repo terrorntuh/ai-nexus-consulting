@@ -62,7 +62,7 @@ async function seed() {
                 const chunk = chunks[i];
                 const embedding = embeddings[i];
 
-                const { error } = await supabase.from('knowledge_vectors').insert({
+                const { error } = await supabase.from('knowledge_base').insert({
                     content: chunk,
                     metadata: { source: file, chunk_index: i },
                     embedding: embedding

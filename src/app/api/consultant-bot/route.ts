@@ -1,5 +1,5 @@
 import { google } from '@ai-sdk/google';
-import { streamText, embed, type UIMessage, convertToModelMessages } from 'ai';
+import { streamText, embed, type UIMessage, convertToModelMessages, isTextUIPart } from 'ai';
 import { createServerClient } from '@/lib/supabase';
 import { getActiveAIModel } from '@/lib/ai-config';
 import crypto from 'crypto';
@@ -11,7 +11,13 @@ export async function POST(req: Request) {
     const { messages }: { messages: UIMessage[] } = await req.json();
 
     const modelMessages = await convertToModelMessages(messages);
-    const lastUserMessage = (messages.filter(m => m.role === 'user').pop() as any)?.content || '';
+    const lastUserMessage = messages
+        .filter((m) => m.role === 'user')
+        .pop()
+        ?.parts
+        .filter(isTextUIPart)
+        .map((p) => p.text)
+        .join('') || '';
     const supabase = createServerClient();
 
     let contextStr = '';
@@ -33,7 +39,9 @@ export async function POST(req: Request) {
             });
 
             if (data && data.length > 0) {
-                contextStr = data.map((d: any) => d.content).join('\n\n');
+                contextStr = (data as Array<{ content: string }>)
+                    .map((d) => d.content)
+                    .join('\n\n');
             }
         } catch (e) {
             console.error('[RAG ERROR]', e);
