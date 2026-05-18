@@ -65,7 +65,7 @@ interface PortalClient {
 function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
-    const demoAdminCode = process.env.NEXT_PUBLIC_DEMO_ADMIN_CODE;
+    const demoAdminCode = process.env.NEXT_PUBLIC_DEMO_ADMIN_CODE || 'nexus-admin-2026';
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
