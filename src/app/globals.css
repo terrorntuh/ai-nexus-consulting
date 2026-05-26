@@ -115,87 +115,77 @@
 }
 
 .brand-logo {
-  --brand-logo-size: 1.68rem;
+  --brand-logo-size: 1.58rem;
+  --brand-symbol-width: 4rem;
   --brand-logo-color: #10131a;
+  align-items: center;
   color: var(--brand-logo-color);
   display: inline-flex;
-  flex-direction: column;
+  gap: 0.68rem;
   line-height: 1;
   min-width: 0;
 }
 
+.brand-symbol {
+  display: block;
+  flex: 0 0 auto;
+  height: auto;
+  width: var(--brand-symbol-width);
+}
+
+.brand-logo-copy {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .brand-logo-main {
-  display: flex;
-  align-items: center;
   font-family: var(--font-heading), Arial, sans-serif;
   font-size: var(--brand-logo-size);
   font-weight: 900;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.22em;
   white-space: nowrap;
-}
-
-.brand-logo-x {
-  background: linear-gradient(135deg, #13b981 0 45%, #ff6a3d 55% 100%);
-  background-clip: text;
-  color: transparent;
-  font-weight: 950;
-  letter-spacing: 0;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .brand-logo-sub {
-  margin-top: 0.32rem;
+  margin-top: 0.42rem;
   font-family: var(--font-heading), Arial, sans-serif;
-  font-size: calc(var(--brand-logo-size) * 0.31);
+  font-size: calc(var(--brand-logo-size) * 0.27);
   font-weight: 850;
-  letter-spacing: 0.46em;
+  letter-spacing: 0.72em;
   white-space: nowrap;
 }
 
-.brand-logo-rule {
-  display: flex;
-  height: 2px;
-  margin-top: 0.58rem;
-  width: 68%;
-}
-
-.brand-logo-rule span:first-child {
-  flex: 1 1 74%;
-  background: #13b981;
-}
-
-.brand-logo-rule span:last-child {
-  flex: 1 1 26%;
-  background: #ff6a3d;
-}
-
 .brand-logo-footer {
-  --brand-logo-size: 2.12rem;
+  --brand-logo-size: 2.34rem;
+  --brand-symbol-width: 7.6rem;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.82rem;
 }
 
 .brand-logo-nav {
-  --brand-logo-size: 1.58rem;
+  --brand-logo-size: 1.28rem;
+  --brand-symbol-width: 3.24rem;
 }
 
 .brand-mark {
   align-items: center;
-  background: #10131a;
-  border-radius: 8px;
-  color: #fffdf8;
   display: inline-flex;
-  font-family: var(--font-heading), Arial, sans-serif;
-  font-size: 0.95rem;
-  font-weight: 900;
-  height: 2.5rem;
+  height: 2.75rem;
   justify-content: center;
-  letter-spacing: -0.02em;
-  width: 2.5rem;
+  width: 3.6rem;
+}
+
+.brand-mark .brand-symbol {
+  width: 100%;
 }
 
 @media (max-width: 480px) {
   .brand-logo-nav {
-    --brand-logo-size: 1.36rem;
+    --brand-logo-size: 1rem;
+    --brand-symbol-width: 2.82rem;
+    gap: 0.48rem;
   }
 }
 
