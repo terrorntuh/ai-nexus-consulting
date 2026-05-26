@@ -1,55 +1,55 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Check, Compass, Rocket, Shield } from 'lucide-react';
+import { Check, Globe2, Rocket, Workflow } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const tiers = [
   {
-    name: 'AI Opportunity Audit',
-    price: 'R4,500',
+    name: 'Basic Website',
+    price: 'From R3,500',
     period: 'once-off',
     description:
-      'A focused audit to find the one AI workflow worth building first, with risk, data, and ROI mapped plainly.',
-    icon: Compass,
+      'A clean starter website for businesses that need a credible online presence before adding heavier systems.',
+    icon: Globe2,
     features: [
-      '90-minute workflow interview',
-      'Automation opportunity map',
-      'POPIA and data readiness notes',
-      'Recommended first build with effort estimate',
+      'One-page or lean starter layout',
+      'Mobile-friendly service and contact sections',
+      'Basic SEO titles and search preview copy',
+      'Domain, email, and launch guidance',
     ],
-    cta: 'Book audit',
+    cta: 'Start website',
   },
   {
-    name: 'Human-Loop Pilot',
-    price: 'From R18,000',
-    period: 'per pilot',
+    name: 'Website + Lead System',
+    price: 'From R8,500',
+    period: 'once-off',
     description:
-      'A working AI workflow with human approval, handover docs, and measurable before/after operating numbers.',
+      'A sharper business website with enquiry capture, routing, follow-up structure, and analytics from day one.',
     icon: Rocket,
     features: [
-      'One production-ready workflow',
-      'Approval and escalation states',
-      'Data cleanup and prompt architecture',
-      'Team training and 14-day tuning window',
+      'Up to 5 core pages',
+      'Contact, quote, or booking enquiry flow',
+      'Lead routing to email, sheet, or CRM-style tracker',
+      'Follow-up templates and analytics setup',
     ],
-    cta: 'Scope pilot',
+    cta: 'Build lead system',
     highlighted: true,
   },
   {
-    name: 'AI Ops Retainer',
-    price: 'Custom',
-    period: 'monthly',
+    name: 'Workflow Pilot',
+    price: 'From R18,000',
+    period: 'per pilot',
     description:
-      'Ongoing implementation for teams ready to expand AI across reporting, support, sales ops, and compliance.',
-    icon: Shield,
+      'A working human-reviewed workflow behind the website for teams ready to reduce admin, not just look better online.',
+    icon: Workflow,
     features: [
-      'Monthly workflow roadmap',
-      'Monitoring and improvement cycles',
-      'Security and governance support',
-      'Executive reporting on adoption and ROI',
+      'One practical workflow build',
+      'Approval and escalation states',
+      'Data cleanup and handover notes',
+      'Team training and 14-day tuning window',
     ],
-    cta: 'Talk retainer',
+    cta: 'Scope workflow',
   },
 ];
 
@@ -58,7 +58,7 @@ export function PricingSection() {
     <section id="pricing" className="section-shell bg-stone">
       <div className="section-heading">
         <p>Commercial offer</p>
-        <h2>Start small enough to trust. Build big enough to matter.</h2>
+        <h2>Start at R3,500. Add systems when the business is ready.</h2>
       </div>
 
       <div className="grid max-w-7xl gap-5 lg:grid-cols-3">
@@ -79,7 +79,7 @@ export function PricingSection() {
               <tier.icon className={tier.highlighted ? 'h-7 w-7 text-coral' : 'h-7 w-7 text-blueprint'} />
               {tier.highlighted && (
                 <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-white/72">
-                  Best first build
+                  Best first move
                 </span>
               )}
             </div>
@@ -120,6 +120,11 @@ export function PricingSection() {
           </motion.article>
         ))}
       </div>
+
+      <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-7 text-ink/54">
+        Monthly support and AI ops retainers are available after launch, once there is a real website,
+        lead flow, or workflow to improve.
+      </p>
     </section>
   );
 }

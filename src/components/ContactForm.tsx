@@ -52,11 +52,11 @@ export function ContactForm() {
         <div>
           <p className="text-xs font-black uppercase tracking-[0.18em] text-coral">Start here</p>
           <h2 className="mt-4 max-w-xl text-4xl font-semibold leading-none md:text-6xl">
-            Bring one painful workflow. We will tell you what is worth building.
+            Need a website, lead system, or workflow? Start here.
           </h2>
           <p className="mt-6 max-w-lg text-base leading-8 text-white/62">
-            Send the process, the tools you use, and what is currently wasting time.
-            The first conversation should feel useful even before there is a proposal.
+            Send what you need built, what you currently use, and what is wasting time.
+            The first conversation should make the next practical step clear.
           </p>
           <a
             href="https://calendly.com/ntuh"
@@ -95,7 +95,7 @@ export function ContactForm() {
             className="mt-4 h-12 rounded-md border-white/12 bg-white/8 text-white placeholder:text-white/36"
           />
           <textarea
-            placeholder="What workflow should AI help with? *"
+            placeholder="Tell us about the website, lead flow, or workflow you need. *"
             value={form.message}
             onChange={(e) => setForm({ ...form, message: e.target.value })}
             rows={6}
@@ -114,7 +114,7 @@ export function ContactForm() {
               ) : (
                 <>
                   <Send className="mr-2 h-4 w-4" />
-                  Send workflow
+                  Send request
                 </>
               )}
             </Button>

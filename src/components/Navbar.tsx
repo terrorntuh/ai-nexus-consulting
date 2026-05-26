@@ -136,7 +136,7 @@ export function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className="mt-6 rounded-md bg-ink px-5 py-4 text-center text-base font-bold text-white"
               >
-                Scope a workflow
+                Get a website quote
               </Link>
             </div>
           </motion.div>

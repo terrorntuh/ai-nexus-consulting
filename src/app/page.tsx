@@ -15,6 +15,7 @@ import {
   LockKeyhole,
   MessageSquareText,
   Play,
+  SearchCheck,
   ShieldCheck,
   Sparkles,
   Users,
@@ -22,9 +23,9 @@ import {
 } from 'lucide-react';
 
 const proof = [
-  { value: 'SA-first', label: 'Built around local adoption, budgets, and POPIA expectations' },
-  { value: 'Human loop', label: 'Every risky action gets review, approval, and an owner' },
-  { value: '30 days', label: 'Enough time to ship one useful workflow, not a slide deck' },
+  { value: 'R3,500', label: 'Starter websites for businesses that need a credible online base' },
+  { value: 'Lead-ready', label: 'Forms, routing, email, and follow-up structure from day one' },
+  { value: 'AI-ready', label: 'Build the website first, then automate the admin behind it' },
 ];
 
 const operatingPrinciples = [
@@ -36,18 +37,25 @@ const operatingPrinciples = [
 
 const useCases = [
   {
-    icon: MessageSquareText,
-    title: 'Support Drafting Desk',
+    icon: SearchCheck,
+    title: 'AI-Ready Website',
     description:
-      'Drafts WhatsApp, email, and portal replies from your policies and previous cases. Your team approves before anything is sent.',
-    result: 'Faster replies without surrendering the customer relationship.',
+      'A clean business website with clear services, contact routing, analytics, and a structure ready for future workflows.',
+    result: 'A credible front door before trying to sell advanced automation.',
+  },
+  {
+    icon: MessageSquareText,
+    title: 'Lead Capture System',
+    description:
+      'Turns website enquiries into organized leads, email alerts, quote requests, and follow-up prompts your team can act on.',
+    result: 'Fewer missed enquiries and a cleaner sales follow-up rhythm.',
   },
   {
     icon: FileText,
-    title: 'Ops Report Builder',
+    title: 'Ops Workflow Pilot',
     description:
-      'Turns spreadsheets, CRM notes, and weekly updates into board-ready reports with citations and review checkpoints.',
-    result: 'Less admin theatre, more decision-making.',
+      'Adds one practical workflow behind the site: intake, document collection, client reminders, or reporting drafts.',
+    result: 'A small working system before committing to bigger AI spend.',
   },
   {
     icon: DatabaseZap,
@@ -68,23 +76,23 @@ const useCases = [
 const buildPath = [
   {
     step: '01',
-    title: 'Find the workflow with money behind it',
-    copy: 'We map the admin, sales, reporting, or support process where AI can save real hours within one month.',
+    title: 'Launch the credible front door',
+    copy: 'We clarify the offer, build the website, connect the domain, and make it easy for prospects to contact you.',
   },
   {
     step: '02',
-    title: 'Prototype with your actual messy inputs',
-    copy: 'We use your documents, spreadsheets, forms, and examples so the workflow reflects the real operating environment.',
+    title: 'Capture leads properly',
+    copy: 'We route enquiries into email, sheets, CRM, or a simple dashboard so follow-up becomes visible and repeatable.',
   },
   {
     step: '03',
-    title: 'Add approval, policy, and handover',
-    copy: 'We wrap the AI in human review, access controls, simple SOPs, and team training before it touches customers.',
+    title: 'Add the first workflow',
+    copy: 'Once the intake is clear, we add one useful workflow: reminders, document collection, reporting, or response drafts.',
   },
   {
     step: '04',
-    title: 'Measure, tune, then expand',
-    copy: 'We track hours saved, error reduction, response time, and adoption before adding the next workflow.',
+    title: 'Measure, tune, then automate',
+    copy: 'We track leads, response time, admin hours, and adoption before adding heavier AI automation.',
   },
 ];
 
@@ -108,19 +116,19 @@ export default function Home() {
 
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-6 pb-20 pt-10 lg:grid-cols-[1.02fr_0.98fr] lg:pb-24">
           <div className="hero-mobile-bound min-w-0 max-w-3xl">
-            <h1 className="max-w-4xl text-[2.75rem] font-semibold leading-[0.98] tracking-normal text-ink md:text-7xl lg:text-8xl">
-              AI systems your team can trust, approve, and actually use.
+            <h1 className="max-w-4xl text-[2.6rem] font-semibold leading-[1.02] tracking-normal text-ink md:text-6xl lg:text-[4.8rem] xl:text-[5.35rem]">
+              Websites and AI systems your team can actually use.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-ink/68 md:text-xl">
-              AI Nexus builds human-in-the-loop automation for South African businesses:
-              practical workflow assistants, cleaner data, faster reporting, and secure workflows that
-              keep people accountable.
+              AI Nexus builds credible websites and human-in-the-loop automation for South African
+              businesses: start with a useful online presence, then add the workflows that save
+              admin time without losing human approval.
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="h-13 rounded-md bg-ink px-6 text-white hover:bg-ink/90">
                 <a href="#contact">
-                  Scope a workflow
+                  Get a website quote
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               </Button>
@@ -227,7 +235,7 @@ export default function Home() {
       <section id="services" className="section-shell bg-white">
         <div className="section-heading">
           <p>Where this is viable right now</p>
-          <h2>Not full autopilot. Useful AI with a responsible human in the loop.</h2>
+          <h2>Start with the website. Grow into the workflow.</h2>
         </div>
 
         <div className="case-grid">
@@ -246,11 +254,11 @@ export default function Home() {
         <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="section-heading mx-0 max-w-xl text-left">
             <p>The pitch, sharper</p>
-            <h2>Sell a supervised AI operations desk, not a sci-fi agent army.</h2>
+            <h2>Sell the business a better front door, then build the engine behind it.</h2>
             <span>
-              The market is ready for better admin, reporting, support, and data workflows.
-              It is less ready to trust invisible agents making decisions alone. So the product
-              story should make oversight feel like a feature, not a compromise.
+              Many teams first need a credible website, clear offers, and working lead capture.
+              Once enquiries are structured, AI Nexus can add the practical workflows behind the
+              scenes: intake, reporting, reminders, and human-approved follow-up.
             </span>
           </div>
 
@@ -258,22 +266,22 @@ export default function Home() {
             <div className="desk-row">
               <Handshake className="h-5 w-5" />
               <div>
-                <h3>Human ownership</h3>
-                <p>Every workflow has a named approver and escalation path.</p>
+                <h3>Website first</h3>
+                <p>Give the business a clear place to send prospects, explain services, and collect enquiries.</p>
               </div>
             </div>
             <div className="desk-row">
               <LockKeyhole className="h-5 w-5" />
               <div>
-                <h3>Data boundaries</h3>
-                <p>AI sees only the files, fields, and permissions required for the job.</p>
+                <h3>Lead capture next</h3>
+                <p>Route forms, quote requests, and email alerts so no enquiry disappears into a messy inbox.</p>
               </div>
             </div>
             <div className="desk-row">
               <BadgeCheck className="h-5 w-5" />
               <div>
-                <h3>Proof before scale</h3>
-                <p>One workflow ships first. Expansion happens when the numbers justify it.</p>
+                <h3>Automation when ready</h3>
+                <p>Add AI only where the workflow is clear, reviewed, and worth the extra spend.</p>
               </div>
             </div>
           </div>
@@ -283,7 +291,7 @@ export default function Home() {
       <section id="process" className="section-shell bg-ink text-white">
         <div className="section-heading text-white">
           <p>How we build</p>
-          <h2>Four weeks to one working AI workflow.</h2>
+          <h2>From website launch to workflow system.</h2>
         </div>
 
         <div className="path-grid">
@@ -301,7 +309,7 @@ export default function Home() {
         <div className="fit-band">
           <div>
             <Sparkles className="h-7 w-7 text-coral" />
-            <h2>Best fit: owner-led and mid-market teams with expensive admin pain.</h2>
+            <h2>Best fit: owner-led teams that need a better website, cleaner leads, and less admin drag.</h2>
           </div>
           <div className="industry-list">
             {industries.map((industry) => (

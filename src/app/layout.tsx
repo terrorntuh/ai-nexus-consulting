@@ -19,13 +19,13 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ainexusconsulting.co.za"),
-  title: "AI Nexus Consulting | Human-Loop AI Systems in South Africa",
+  title: "AI Nexus Consulting | Websites and Human-Loop AI Systems",
   description:
-    "South Africa-based AI consulting for practical human-reviewed workflows, POPIA-aware automation, data cleanup, reporting, and client delivery systems.",
-  keywords: ["AI consulting", "South Africa", "POPIA", "human in the loop AI", "workflow automation"],
+    "South Africa-based websites, lead capture systems, and human-reviewed AI workflows for businesses that need a credible online presence and less admin drag.",
+  keywords: ["website design South Africa", "AI consulting", "South Africa", "POPIA", "lead capture", "workflow automation"],
   openGraph: {
     title: "AI Nexus Consulting",
-    description: "Human-loop AI systems for South African businesses",
+    description: "Websites, lead systems, and human-loop AI workflows for South African businesses",
     url: "https://ainexusconsulting.co.za",
     siteName: "AI Nexus Consulting",
     type: "website",

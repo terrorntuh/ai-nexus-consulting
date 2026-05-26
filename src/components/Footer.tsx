@@ -24,13 +24,13 @@ export function Footer() {
               <div>
                 <span className="block font-black">AI Nexus Consulting</span>
                 <span className="text-xs font-bold uppercase tracking-[0.22em] text-ink/42">
-                  Human-loop AI systems
+                  Websites and human-loop AI
                 </span>
               </div>
             </div>
             <p className="mt-5 max-w-md text-sm leading-7 text-ink/58">
-              Practical AI consulting for South African teams that want speed without losing
-              judgement, compliance, or operational control.
+              Practical websites, lead systems, and AI workflows for South African teams that want
+              speed without losing judgement, compliance, or operational control.
             </p>
           </div>
 
