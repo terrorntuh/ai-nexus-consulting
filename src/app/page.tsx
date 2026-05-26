@@ -117,7 +117,7 @@ export default function Home() {
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-6 pb-20 pt-10 lg:grid-cols-[1.02fr_0.98fr] lg:pb-24">
           <div className="hero-mobile-bound min-w-0 max-w-3xl">
             <h1 className="max-w-4xl text-[2.6rem] font-semibold leading-[1.02] tracking-normal text-ink md:text-6xl lg:text-[4.8rem] xl:text-[5.35rem]">
-              Websites and AI systems your team can actually use.
+              Websites and AI systems that actually work.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-ink/68 md:text-xl">
               AI Nexus builds credible websites and human-in-the-loop automation for South African
