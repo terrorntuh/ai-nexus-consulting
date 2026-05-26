@@ -45,6 +45,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: [
+      {
+        url: "/ai-nexus-mark.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    shortcut: "/ai-nexus-mark.svg",
+  },
   robots: {
     index: true,
     follow: true,

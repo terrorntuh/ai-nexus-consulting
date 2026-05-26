@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import { BrandLogo } from '@/components/BrandLogo';
 import { createClient } from '@/utils/supabase/client';
 
 const navLinks = [
@@ -55,16 +56,8 @@ export function Navbar() {
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-3 text-ink" aria-label="AI Nexus Consulting home">
-            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-ink text-sm font-black text-white">
-              NX
-            </div>
-            <div className="leading-none">
-              <span className="block text-base font-black tracking-normal">AI Nexus</span>
-              <span className="mt-1 block text-[0.68rem] font-bold uppercase tracking-[0.24em] text-ink/48">
-                Consulting
-              </span>
-            </div>
+          <Link href="/" className="flex items-center text-ink" aria-label="AI Nexus Consulting home">
+            <BrandLogo className="brand-logo-nav" />
           </Link>
 
           <div className="hidden items-center gap-1 md:flex">

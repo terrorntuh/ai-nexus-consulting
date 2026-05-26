@@ -1,4 +1,5 @@
 import { Mail, MapPin, ShieldCheck } from 'lucide-react';
+import { BrandLogo } from '@/components/BrandLogo';
 import { ContactForm } from '@/components/ContactForm';
 
 const links = [
@@ -17,17 +18,10 @@ export function Footer() {
       <div className="bg-paper">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div>
-            <div className="flex items-center gap-3 text-ink">
-              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-ink text-sm font-black text-white">
-                NX
-              </div>
-              <div>
-                <span className="block font-black">AI Nexus Consulting</span>
-                <span className="text-xs font-bold uppercase tracking-[0.22em] text-ink/42">
-                  Websites, apps & human-loop AI
-                </span>
-              </div>
-            </div>
+            <BrandLogo className="brand-logo-footer" />
+            <p className="mt-4 text-xs font-bold uppercase tracking-[0.22em] text-ink/42">
+              Websites, apps & human-loop AI
+            </p>
             <p className="mt-5 max-w-md text-sm leading-7 text-ink/58">
               Practical websites, custom apps, lead systems, consulting, and AI workflows for South
               African teams that want speed without losing judgement, compliance, or operational control.

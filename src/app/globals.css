@@ -114,6 +114,91 @@
   max-width: 1280px;
 }
 
+.brand-logo {
+  --brand-logo-size: 1.68rem;
+  --brand-logo-color: #10131a;
+  color: var(--brand-logo-color);
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1;
+  min-width: 0;
+}
+
+.brand-logo-main {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-heading), Arial, sans-serif;
+  font-size: var(--brand-logo-size);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.brand-logo-x {
+  background: linear-gradient(135deg, #13b981 0 45%, #ff6a3d 55% 100%);
+  background-clip: text;
+  color: transparent;
+  font-weight: 950;
+  letter-spacing: 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-logo-sub {
+  margin-top: 0.32rem;
+  font-family: var(--font-heading), Arial, sans-serif;
+  font-size: calc(var(--brand-logo-size) * 0.31);
+  font-weight: 850;
+  letter-spacing: 0.46em;
+  white-space: nowrap;
+}
+
+.brand-logo-rule {
+  display: flex;
+  height: 2px;
+  margin-top: 0.58rem;
+  width: 68%;
+}
+
+.brand-logo-rule span:first-child {
+  flex: 1 1 74%;
+  background: #13b981;
+}
+
+.brand-logo-rule span:last-child {
+  flex: 1 1 26%;
+  background: #ff6a3d;
+}
+
+.brand-logo-footer {
+  --brand-logo-size: 2.12rem;
+}
+
+.brand-logo-nav {
+  --brand-logo-size: 1.58rem;
+}
+
+.brand-mark {
+  align-items: center;
+  background: #10131a;
+  border-radius: 8px;
+  color: #fffdf8;
+  display: inline-flex;
+  font-family: var(--font-heading), Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 900;
+  height: 2.5rem;
+  justify-content: center;
+  letter-spacing: -0.02em;
+  width: 2.5rem;
+}
+
+@media (max-width: 480px) {
+  .brand-logo-nav {
+    --brand-logo-size: 1.36rem;
+  }
+}
+
 .section-heading {
   margin: 0 auto 56px;
   max-width: 760px;
