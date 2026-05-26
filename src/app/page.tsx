@@ -244,6 +244,10 @@ export default function Home() {
         <div className="section-heading">
           <p>Where this is viable right now</p>
           <h2>Start with the website. Grow into apps, consulting, and workflow systems.</h2>
+          <span>
+            AI Nexus Consulting is a Johannesburg-based AI consulting and web development company
+            helping South African service businesses launch credible digital systems.
+          </span>
         </div>
 
         <div className="case-grid">
