@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Check, Globe2, Rocket, Workflow } from 'lucide-react';
+import { AppWindow, Check, Globe2, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const tiers = [
@@ -37,19 +37,19 @@ const tiers = [
     highlighted: true,
   },
   {
-    name: 'Workflow Pilot',
+    name: 'Custom App / Workflow Pilot',
     price: 'From R18,000',
     period: 'per pilot',
     description:
-      'A working human-reviewed workflow behind the website for teams ready to reduce admin, not just look better online.',
-    icon: Workflow,
+      'A working portal, dashboard, internal tool, or human-reviewed workflow for teams ready to reduce admin, not just look better online.',
+    icon: AppWindow,
     features: [
-      'One practical workflow build',
+      'One practical app or workflow build',
       'Approval and escalation states',
-      'Data cleanup and handover notes',
+      'Data cleanup, reporting, and handover notes',
       'Team training and 14-day tuning window',
     ],
-    cta: 'Scope workflow',
+    cta: 'Scope app or workflow',
   },
 ];
 
@@ -58,7 +58,7 @@ export function PricingSection() {
     <section id="pricing" className="section-shell bg-stone">
       <div className="section-heading">
         <p>Commercial offer</p>
-        <h2>Start at R3,500. Add systems when the business is ready.</h2>
+        <h2>Start at R3,500. Add apps and consulting when the business is ready.</h2>
       </div>
 
       <div className="grid max-w-7xl gap-5 lg:grid-cols-3">
@@ -122,8 +122,8 @@ export function PricingSection() {
       </div>
 
       <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-7 text-ink/54">
-        Monthly support and AI ops retainers are available after launch, once there is a real website,
-        lead flow, or workflow to improve.
+        Consulting sprints, monthly support, and AI ops retainers are available after launch, once
+        there is a real website, app, lead flow, or workflow to improve.
       </p>
     </section>
   );

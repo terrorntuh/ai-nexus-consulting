@@ -90,7 +90,7 @@ export function Navbar() {
               href="/#contact"
               className="rounded-md bg-ink px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-blueprint"
             >
-              Start
+              Start project
             </Link>
           </div>
 
@@ -136,7 +136,7 @@ export function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className="mt-6 rounded-md bg-ink px-5 py-4 text-center text-base font-bold text-white"
               >
-                Get a website quote
+                Start a project
               </Link>
             </div>
           </motion.div>

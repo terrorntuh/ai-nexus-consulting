@@ -8,10 +8,10 @@ import {
   ArrowRight,
   BadgeCheck,
   CheckCircle2,
-  ClipboardCheck,
   DatabaseZap,
   FileText,
   Handshake,
+  Lightbulb,
   LockKeyhole,
   MessageSquareText,
   Play,
@@ -24,8 +24,8 @@ import {
 
 const proof = [
   { value: 'R3,500', label: 'Starter websites for businesses that need a credible online base' },
-  { value: 'Lead-ready', label: 'Forms, routing, email, and follow-up structure from day one' },
-  { value: 'AI-ready', label: 'Build the website first, then automate the admin behind it' },
+  { value: 'Apps', label: 'Client portals, internal tools, and lead systems when the website needs more' },
+  { value: 'Consulting', label: 'Practical AI and digital systems advice before expensive automation' },
 ];
 
 const operatingPrinciples = [
@@ -38,10 +38,17 @@ const operatingPrinciples = [
 const useCases = [
   {
     icon: SearchCheck,
-    title: 'AI-Ready Website',
+    title: 'Business Website',
     description:
-      'A clean business website with clear services, contact routing, analytics, and a structure ready for future workflows.',
-    result: 'A credible front door before trying to sell advanced automation.',
+      'A clean, mobile-friendly website with clear services, contact routing, analytics, and room to grow.',
+    result: 'A credible front door before selling heavier systems.',
+  },
+  {
+    icon: Workflow,
+    title: 'Custom Web App',
+    description:
+      'Builds portals, quote tools, booking flows, dashboards, or internal trackers when a normal website is not enough.',
+    result: 'A useful app your team or clients can actually log into.',
   },
   {
     icon: MessageSquareText,
@@ -59,17 +66,17 @@ const useCases = [
   },
   {
     icon: DatabaseZap,
-    title: 'Data Cleanup Desk',
+    title: 'Data Cleanup & Reporting',
     description:
-      'Finds duplicates, broken fields, risky personal information, and missing records before migration or automation work.',
-    result: 'Clean inputs before expensive AI decisions.',
+      'Finds duplicates, broken fields, risky personal information, and missing records before migration, reporting, or automation work.',
+    result: 'Clean inputs before expensive system decisions.',
   },
   {
-    icon: ClipboardCheck,
-    title: 'Compliance Sentinel',
+    icon: Lightbulb,
+    title: 'AI & Digital Consulting',
     description:
-      'Flags POPIA risk, consent gaps, retention issues, and unapproved data movement before new workflows go live.',
-    result: 'Confidence for founders, managers, and boards.',
+      'Maps messy workflows, reviews tools, spots POPIA and data risks, and turns ideas into a practical build plan.',
+    result: 'Clarity before committing budget, tools, or team time.',
   },
 ];
 
@@ -86,13 +93,13 @@ const buildPath = [
   },
   {
     step: '03',
-    title: 'Add the first workflow',
-    copy: 'Once the intake is clear, we add one useful workflow: reminders, document collection, reporting, or response drafts.',
+    title: 'Add the first app or workflow',
+    copy: 'Once the intake is clear, we add one useful portal, dashboard, reminder flow, document collection process, or reporting tool.',
   },
   {
     step: '04',
-    title: 'Measure, tune, then automate',
-    copy: 'We track leads, response time, admin hours, and adoption before adding heavier AI automation.',
+    title: 'Consult, tune, then automate',
+    copy: 'We track leads, response time, admin hours, and adoption before adding heavier AI automation or retainers.',
   },
 ];
 
@@ -117,18 +124,19 @@ export default function Home() {
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-6 pb-20 pt-10 lg:grid-cols-[1.02fr_0.98fr] lg:pb-24">
           <div className="hero-mobile-bound min-w-0 max-w-3xl">
             <h1 className="max-w-4xl text-[2.6rem] font-semibold leading-[1.02] tracking-normal text-ink md:text-6xl lg:text-[4.8rem] xl:text-[5.35rem]">
-              Websites and AI systems that actually work.
+              Websites, apps and AI systems that actually work.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-ink/68 md:text-xl">
-              AI Nexus builds credible websites and human-in-the-loop automation for South African
-              businesses: start with a useful online presence, then add the workflows that save
-              admin time without losing human approval.
+              AI Nexus builds credible websites, custom web apps, and human-in-the-loop AI
+              systems for South African businesses. Start with a useful online presence, then add
+              lead capture, consulting, and workflows that save admin time without losing human
+              approval.
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="h-13 rounded-md bg-ink px-6 text-white hover:bg-ink/90">
                 <a href="#contact">
-                  Get a website quote
+                  Start a project
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               </Button>
@@ -235,7 +243,7 @@ export default function Home() {
       <section id="services" className="section-shell bg-white">
         <div className="section-heading">
           <p>Where this is viable right now</p>
-          <h2>Start with the website. Grow into the workflow.</h2>
+          <h2>Start with the website. Grow into apps, consulting, and workflow systems.</h2>
         </div>
 
         <div className="case-grid">
@@ -254,11 +262,11 @@ export default function Home() {
         <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="section-heading mx-0 max-w-xl text-left">
             <p>The pitch, sharper</p>
-            <h2>Sell the business a better front door, then build the engine behind it.</h2>
+            <h2>The website is the entry offer. Apps are the upgrade. Consulting is the trust layer.</h2>
             <span>
-              Many teams first need a credible website, clear offers, and working lead capture.
-              Once enquiries are structured, AI Nexus can add the practical workflows behind the
-              scenes: intake, reporting, reminders, and human-approved follow-up.
+              Many teams first need a credible website, clear offers, and working lead capture. When
+              the business is ready, AI Nexus can add portals, dashboards, workflow automation, and
+              practical AI consulting behind the scenes.
             </span>
           </div>
 
@@ -280,8 +288,8 @@ export default function Home() {
             <div className="desk-row">
               <BadgeCheck className="h-5 w-5" />
               <div>
-                <h3>Automation when ready</h3>
-                <p>Add AI only where the workflow is clear, reviewed, and worth the extra spend.</p>
+                <h3>Systems when ready</h3>
+                <p>Add apps, workflow automation, and AI only where the process is clear and worth the extra spend.</p>
               </div>
             </div>
           </div>
@@ -291,7 +299,7 @@ export default function Home() {
       <section id="process" className="section-shell bg-ink text-white">
         <div className="section-heading text-white">
           <p>How we build</p>
-          <h2>From website launch to workflow system.</h2>
+          <h2>From website launch to useful operating system.</h2>
         </div>
 
         <div className="path-grid">
@@ -309,7 +317,7 @@ export default function Home() {
         <div className="fit-band">
           <div>
             <Sparkles className="h-7 w-7 text-coral" />
-            <h2>Best fit: owner-led teams that need a better website, cleaner leads, and less admin drag.</h2>
+            <h2>Best fit: owner-led teams that need a better website, simple apps, cleaner leads, and less admin drag.</h2>
           </div>
           <div className="industry-list">
             {industries.map((industry) => (
