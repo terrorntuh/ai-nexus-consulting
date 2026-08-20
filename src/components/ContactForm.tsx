@@ -1,14 +1,42 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { AlertCircle, ArrowUpRight, Calendar, CheckCircle, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+
+const PACKAGE_LABELS: Record<string, string> = {
+  'basic-website': 'Basic Website',
+  'website-lead-system': 'Website + Lead System',
+  'custom-app-pilot': 'Custom App / Workflow Pilot',
+};
 
 export function ContactForm() {
-  const [form, setForm] = useState({ name: '', email: '', company: '', message: '' });
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    message: '',
+    package: '',
+  });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const pkg = params.get('package') || '';
+    if (pkg in PACKAGE_LABELS) {
+      setForm((current) => ({ ...current, package: pkg }));
+    }
+  }, []);
+
+  const selectedPackage = PACKAGE_LABELS[form.package];
+  const heading = useMemo(() => {
+    if (selectedPackage) return `Interested in ${selectedPackage}? Start here.`;
+    return 'Need a website, app, consulting, or workflow? Start here.';
+  }, [selectedPackage]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +53,7 @@ export function ContactForm() {
       if (res.ok) {
         const { id } = await res.json();
         setStatus('success');
-        setForm({ name: '', email: '', company: '', message: '' });
+        setForm({ name: '', email: '', phone: '', company: '', message: '', package: form.package });
 
         if (id && id !== 'local-fallback') {
           fetch('/api/leads/analyze', {
@@ -52,7 +80,7 @@ export function ContactForm() {
         <div>
           <p className="text-xs font-black uppercase tracking-[0.18em] text-coral">Start here</p>
           <h2 className="mt-4 max-w-xl text-4xl font-semibold leading-none md:text-6xl">
-            Need a website, app, consulting, or workflow? Start here.
+            {heading}
           </h2>
           <p className="mt-6 max-w-lg text-base leading-8 text-white/62">
             Send what you need built, what you currently use, and what is wasting time.
@@ -65,43 +93,77 @@ export function ContactForm() {
             className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-coral transition-colors hover:text-white"
           >
             <Calendar className="h-4 w-4" />
-            Book directly on Calendly
+            Book a 20-min AI Nexus call
             <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>
 
         <form onSubmit={handleSubmit} className="rounded-md border border-white/12 bg-white/[0.055] p-5 md:p-7">
+          {selectedPackage && (
+            <p className="mb-4 rounded-md border border-coral/30 bg-coral/10 px-3 py-2 text-sm font-semibold text-coral">
+              Package selected: {selectedPackage}
+            </p>
+          )}
           <div className="grid gap-4 sm:grid-cols-2">
-            <Input
-              placeholder="Name *"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="h-12 rounded-md border-white/12 bg-white/8 text-white placeholder:text-white/36"
+            <div className="space-y-2">
+              <Label htmlFor="contact-name" className="text-white/70">Name</Label>
+              <Input
+                id="contact-name"
+                placeholder="Your name"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                className="h-12 rounded-md border-white/12 bg-white/8 text-white placeholder:text-white/36"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="contact-email" className="text-white/70">Email</Label>
+              <Input
+                id="contact-email"
+                type="email"
+                placeholder="you@company.co.za"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                className="h-12 rounded-md border-white/12 bg-white/8 text-white placeholder:text-white/36"
+                required
+              />
+            </div>
+          </div>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="contact-phone" className="text-white/70">Phone</Label>
+              <Input
+                id="contact-phone"
+                type="tel"
+                placeholder="Optional"
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                className="h-12 rounded-md border-white/12 bg-white/8 text-white placeholder:text-white/36"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="contact-company" className="text-white/70">Company</Label>
+              <Input
+                id="contact-company"
+                placeholder="Optional"
+                value={form.company}
+                onChange={(e) => setForm({ ...form, company: e.target.value })}
+                className="h-12 rounded-md border-white/12 bg-white/8 text-white placeholder:text-white/36"
+              />
+            </div>
+          </div>
+          <div className="mt-4 space-y-2">
+            <Label htmlFor="contact-message" className="text-white/70">What do you need?</Label>
+            <textarea
+              id="contact-message"
+              placeholder="Tell us about the website, app, lead flow, consulting, or workflow you need."
+              value={form.message}
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
+              rows={6}
               required
-            />
-            <Input
-              type="email"
-              placeholder="Email *"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="h-12 rounded-md border-white/12 bg-white/8 text-white placeholder:text-white/36"
-              required
+              className="w-full resize-none rounded-md border border-white/12 bg-white/8 px-3 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/36 focus:border-coral"
             />
           </div>
-          <Input
-            placeholder="Company"
-            value={form.company}
-            onChange={(e) => setForm({ ...form, company: e.target.value })}
-            className="mt-4 h-12 rounded-md border-white/12 bg-white/8 text-white placeholder:text-white/36"
-          />
-          <textarea
-            placeholder="Tell us about the website, app, lead flow, consulting, or workflow you need. *"
-            value={form.message}
-            onChange={(e) => setForm({ ...form, message: e.target.value })}
-            rows={6}
-            required
-            className="mt-4 w-full resize-none rounded-md border border-white/12 bg-white/8 px-3 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/36 focus:border-coral"
-          />
 
           <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Button

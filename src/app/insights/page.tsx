@@ -8,6 +8,13 @@ export const metadata = {
   title: 'Insights & Methodology | AI Nexus Consulting',
   description:
     'Practical notes on POPIA-aware AI workflows, human approval, and automation strategy for South African businesses.',
+  alternates: { canonical: '/insights' },
+  openGraph: {
+    title: 'Insights & Methodology | AI Nexus Consulting',
+    description:
+      'Practical notes on POPIA-aware AI workflows, human approval, and automation strategy for South African businesses.',
+    url: 'https://www.ainexusconsulting.co.za/insights',
+  },
 };
 
 export default function InsightsPage() {

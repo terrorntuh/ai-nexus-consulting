@@ -19,6 +19,7 @@ const tiers = [
       'Domain, email, and launch guidance',
     ],
     cta: 'Start website',
+    package: 'basic-website',
   },
   {
     name: 'Website + Lead System',
@@ -34,6 +35,7 @@ const tiers = [
       'Follow-up templates and analytics setup',
     ],
     cta: 'Build lead system',
+    package: 'website-lead-system',
     highlighted: true,
   },
   {
@@ -50,6 +52,7 @@ const tiers = [
       'Team training and 14-day tuning window',
     ],
     cta: 'Scope app or workflow',
+    package: 'custom-app-pilot',
   },
 ];
 
@@ -115,7 +118,7 @@ export function PricingSection() {
                   : 'bg-ink text-white hover:bg-blueprint'
               }`}
             >
-              <a href="#contact">{tier.cta}</a>
+              <a href={`/?package=${tier.package}#contact`}>{tier.cta}</a>
             </Button>
           </motion.article>
         ))}

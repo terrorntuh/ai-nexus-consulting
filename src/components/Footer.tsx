@@ -8,6 +8,7 @@ const links = [
   { label: 'Process', href: '/#process' },
   { label: 'Pricing', href: '/#pricing' },
   { label: 'Insights', href: '/insights' },
+  { label: 'Privacy', href: '/privacy' },
 ];
 
 export function Footer() {
@@ -50,10 +51,10 @@ export function Footer() {
                 <Mail className="h-4 w-4 text-coral" />
                 sales@ainexusconsulting.co.za
               </a>
-              <span className="flex items-center gap-2 text-mint">
+              <a href="/privacy" className="flex items-center gap-2 text-mint hover:text-ink">
                 <ShieldCheck className="h-4 w-4" />
                 POPIA-aware by design
-              </span>
+              </a>
             </div>
           </div>
         </div>
@@ -61,7 +62,11 @@ export function Footer() {
         <div className="border-t border-ink/10">
           <div className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-6 text-xs font-semibold text-ink/42 md:flex-row md:items-center md:justify-between">
             <p>© {new Date().getFullYear()} AI Nexus Consulting. All rights reserved.</p>
-            <p>Built for useful work, not empty AI theatre.</p>
+            <p>
+              <a href="/privacy" className="hover:text-ink">Privacy</a>
+              <span className="mx-2">·</span>
+              Built for useful work, not empty AI theatre.
+            </p>
           </div>
         </div>
       </div>

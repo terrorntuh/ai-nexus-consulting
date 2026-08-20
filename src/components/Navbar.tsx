@@ -75,7 +75,7 @@ export function Navbar() {
           <div className="hidden items-center gap-3 md:flex">
             <Link
               href={user ? '/portal' : '/portal/login'}
-              className="text-sm font-bold text-ink/62 transition-colors hover:text-ink"
+              className="text-xs font-semibold text-ink/42 transition-colors hover:text-ink/70"
             >
               {user ? 'Portal' : 'Client login'}
             </Link>
