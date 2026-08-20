@@ -57,14 +57,13 @@ interface PortalClient {
 function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
-    const fallbackAdminCode = 'nexus-admin-2026';
     const demoAdminCode = process.env.NEXT_PUBLIC_DEMO_ADMIN_CODE;
-    const hasDemoGate = Boolean(demoAdminCode || fallbackAdminCode);
+    const hasDemoGate = Boolean(demoAdminCode);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Simple client-side password gate — not production-grade auth
-        if (password === demoAdminCode || password === fallbackAdminCode) {
+        if (demoAdminCode && password === demoAdminCode) {
             onUnlock();
         } else {
             setError(true);
@@ -89,8 +88,8 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
                         </CardTitle>
                         <CardDescription className="text-white/40 text-sm">
                             {hasDemoGate
-                                ? 'Enter your demo access code to continue.'
-                                : 'Demo admin access is disabled in this environment.'}
+                                ? 'Enter your access code to continue.'
+                                : 'Admin access is not enabled in this environment.'}
                         </CardDescription>
                     </CardHeader>
                     <CardContent>

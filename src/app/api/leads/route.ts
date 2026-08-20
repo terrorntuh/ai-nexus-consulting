@@ -3,7 +3,7 @@ import { createServerClient } from '@/lib/supabase';
 
 export async function POST(req: Request) {
     try {
-        const { name, email, company, message } = await req.json();
+        const { name, email, company, message, phone, package: pkg } = await req.json();
 
         // Validation
         if (!name || !email || !message) {
@@ -13,17 +13,23 @@ export async function POST(req: Request) {
             );
         }
 
+        const composedMessage = [
+            pkg ? `Package: ${pkg}` : '',
+            phone ? `Phone: ${phone}` : '',
+            message,
+        ].filter(Boolean).join('\n\n');
+
         const supabase = createServerClient();
 
         if (!supabase) {
             // DB not configured — still accept the lead but log it
-            console.log('[LEAD]', { name, email, company, message });
+            console.log('[LEAD]', { name, email, company, phone, package: pkg, message: composedMessage });
             return NextResponse.json({ success: true, id: 'local-fallback' });
         }
 
         const { data, error } = await supabase
             .from('leads')
-            .insert({ name, email, company, message, source: 'contact_form' })
+            .insert({ name, email, company, message: composedMessage, source: 'contact_form' })
             .select('id')
             .single();
 

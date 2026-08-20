@@ -41,6 +41,7 @@ export const metadata: Metadata = {
     siteName: "AI Nexus Consulting",
     type: "website",
     locale: "en_ZA",
+    images: [{ url: "/ai-nexus-mark.svg", alt: "AI Nexus Consulting" }],
   },
   alternates: {
     canonical: "/",

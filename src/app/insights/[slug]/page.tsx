@@ -29,6 +29,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${post.metadata.title} | AI Nexus Consulting`,
     description: post.metadata.excerpt,
+    alternates: { canonical: `/insights/${slug}` },
+    openGraph: {
+      title: `${post.metadata.title} | AI Nexus Consulting`,
+      description: post.metadata.excerpt,
+      url: `https://www.ainexusconsulting.co.za/insights/${slug}`,
+    },
   };
 }
 

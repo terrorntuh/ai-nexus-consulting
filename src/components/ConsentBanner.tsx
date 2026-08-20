@@ -42,7 +42,8 @@ export function ConsentBanner() {
                             <div className="space-y-2">
                                 <h3 className="font-black text-ink uppercase tracking-[0.16em] text-xs">Privacy & Compliance</h3>
                                 <p className="text-xs text-ink/62 leading-relaxed">
-                                    We value your digital sovereignty. By using this site, you consent to POPIA-aware handling for contact forms, usage logs, and lead follow-up.
+                                    We handle contact forms, usage logs, and lead follow-up in a POPIA-aware way.
+                                    Read the <a href="/privacy" className="font-bold text-ink underline underline-offset-2">privacy notice</a>.
                                 </p>
                                 <div className="pt-2">
                                     <Button

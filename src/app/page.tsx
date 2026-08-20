@@ -14,7 +14,6 @@ import {
   Lightbulb,
   LockKeyhole,
   MessageSquareText,
-  Play,
   SearchCheck,
   ShieldCheck,
   Sparkles,
@@ -117,23 +116,22 @@ export default function Home() {
     <main className="min-h-screen overflow-x-hidden bg-background text-foreground">
       <Navbar />
 
-      <section className="relative min-h-[92vh] overflow-hidden pt-28">
+      <section className="relative overflow-hidden pt-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(42,92,255,0.16),transparent_24%),radial-gradient(circle_at_86%_10%,rgba(255,106,61,0.16),transparent_22%),linear-gradient(180deg,#f7f5ef_0%,#ffffff_72%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-ink/10" />
 
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-6 pb-20 pt-10 lg:grid-cols-[1.02fr_0.98fr] lg:pb-24">
           <div className="hero-mobile-bound min-w-0 max-w-3xl">
-            <h1 className="max-w-4xl text-[2.6rem] font-semibold leading-[1.02] tracking-normal text-ink md:text-6xl lg:text-[4.8rem] xl:text-[5.35rem]">
-              Websites, apps and AI systems that actually work.
+            <h1 className="max-w-4xl text-[2.15rem] font-semibold leading-[1.08] tracking-normal text-ink md:text-5xl lg:text-6xl">
+              A website that brings in enquiries. Systems when you&apos;re ready.
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-ink/68 md:text-xl">
-              AI Nexus builds credible websites, custom web apps, and human-in-the-loop AI
-              systems for South African businesses. Start with a useful online presence, then add
-              lead capture, consulting, and workflows that save admin time without losing human
-              approval.
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/68 md:text-xl">
+              AI Nexus builds sites, lead capture, and human-reviewed workflows for South African
+              owner-led teams. Start with a credible front door. Add apps and AI only when the
+              process is worth it.
             </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="h-13 rounded-md bg-ink px-6 text-white hover:bg-ink/90">
                 <a href="#contact">
                   Start a project
@@ -146,12 +144,18 @@ export default function Home() {
                 variant="outline"
                 className="h-13 rounded-md border-ink/15 bg-white/60 px-6 text-ink hover:bg-white"
               >
-                <a href="#approach">
-                  <Play className="mr-2 h-4 w-4" />
-                  See the approach
+                <a href="#pricing">
+                  See packages from R3,500
                 </a>
               </Button>
             </div>
+            <p className="mt-5 text-sm font-semibold tracking-wide text-ink/52">
+              Johannesburg · POPIA-aware · A human approves every client message
+            </p>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-ink/58">
+              Built by Ntuthuko Ncwane in Johannesburg for owner-led teams who need a site that
+              actually produces enquiries.
+            </p>
 
             <div className="mt-12 grid gap-4 border-y border-ink/10 py-6 sm:grid-cols-3">
               {proof.map((item) => (
@@ -169,14 +173,14 @@ export default function Home() {
                 <span />
                 <span />
                 <span />
-                <p>Workflow Control Room</p>
+                <p>Example: how a lead is handled</p>
               </div>
 
               <div className="console-grid">
                 <div className="console-main">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="console-label">Live workflow</p>
+                      <p className="console-label">Demo workflow</p>
                       <h2>Client intake triage</h2>
                     </div>
                     <div className="status-pill">
@@ -215,14 +219,14 @@ export default function Home() {
 
                 <div className="console-side">
                   <div>
-                    <p className="console-label">Risk score</p>
-                    <strong>Low</strong>
-                    <span>2 policy checks need owner approval</span>
+                    <p className="console-label">Review state</p>
+                    <strong>Demo</strong>
+                    <span>Human approval before anything is sent</span>
                   </div>
                   <div>
-                    <p className="console-label">Hours saved</p>
-                    <strong>8.5</strong>
-                    <span>Estimated weekly admin reduction</span>
+                    <p className="console-label">What this shows</p>
+                    <strong>Example</strong>
+                    <span>Not a client result — a sample of the review flow</span>
                   </div>
                 </div>
               </div>
