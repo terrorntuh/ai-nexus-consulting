@@ -29,10 +29,10 @@ const proof = [
 ];
 
 const operatingPrinciples = [
-  'No black-box automation in live operations',
-  'Secure access to only the data a workflow needs',
-  'Plain-English handover for the team that will own it',
-  'Audit logs, rollback paths, and approval states by default',
+  'Human approval before client-facing action',
+  'Limit access to the data each workflow needs',
+  'Plain-English handover for the team using it',
+  'Record decisions and review states for accountability',
 ];
 
 const useCases = [
@@ -129,7 +129,7 @@ export default function Home() {
             <p className="mt-7 max-w-2xl text-lg leading-8 text-ink/68 md:text-xl">
               AI Nexus builds credible websites, custom web apps, and human-in-the-loop AI
               systems for South African businesses. Start with a useful online presence, then add
-              lead capture, consulting, and workflows that save admin time without losing human
+              lead capture, consulting, and workflows that organise admin work with human
               approval.
             </p>
 
@@ -169,14 +169,14 @@ export default function Home() {
                 <span />
                 <span />
                 <span />
-                <p>Workflow Control Room</p>
+                <p>Workflow Control Room concept</p>
               </div>
 
               <div className="console-grid">
                 <div className="console-main">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="console-label">Live workflow</p>
+                      <p className="console-label">Illustrative workflow</p>
                       <h2>Client intake triage</h2>
                     </div>
                     <div className="status-pill">
@@ -215,14 +215,14 @@ export default function Home() {
 
                 <div className="console-side">
                   <div>
-                    <p className="console-label">Risk score</p>
-                    <strong>Low</strong>
-                    <span>2 policy checks need owner approval</span>
+                    <p className="console-label">Review step</p>
+                    <strong>Human check</strong>
+                    <span>Confirm the next action before replying</span>
                   </div>
                   <div>
-                    <p className="console-label">Hours saved</p>
-                    <strong>8.5</strong>
-                    <span>Estimated weekly admin reduction</span>
+                    <p className="console-label">Evidence status</p>
+                    <strong>Concept</strong>
+                    <span>Static example, not a measured client result</span>
                   </div>
                 </div>
               </div>

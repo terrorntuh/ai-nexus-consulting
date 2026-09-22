@@ -1,26 +1,26 @@
 ---
-title: "The POPIA-First Approach to Enterprise AI"
-excerpt: "Why data privacy isn't just a legal requirement, but a strategic advantage in emerging markets."
-date: "2024-10-15"
-readingTime: "4 min read"
+title: "Human Review and Data Minimisation in Lead Intake"
+excerpt: "What our local LeadFlow prototype implements, and what still needs validation before real customer use."
+date: "2026-09-22"
+readingTime: "2 min read"
 ---
 
-At AI Nexus Consulting, we believe compliance is not an afterthought; it is our foundation. When deploying large-scale AI systems in emerging markets, **Protection of Personal Information Act (POPIA)** adherence must be baked directly into the neural architecture.
+AI Nexus is developing LeadFlow as an internal lead intake and review system. It is implemented in a local development branch, not deployed as a live customer workflow. This note explains the choices in that prototype and the checks still needed before using real enquiries.
 
-## Why Local Data Matters
+## Capture the enquiry first
 
-When you send raw enterprise data to public APIs, you risk leaking personally identifiable information (PII). Our approach utilizes:
-1. **Localized LLM Hosting:** Where possible, we deploy open-source models directly inside your VPC.
-2. **PII Redaction Middleware:** Before any query reaches a cloud provider (like OpenAI or Google), strict regex and NLP engines strip out names, ID numbers, and sensitive financials.
+The intake design stores the original enquiry and a structured lead record before optional AI assistance begins. Deterministic rules classify likely service interest and record why they chose it. If an AI provider is unavailable, the lead remains available for a person to review. This behaviour is covered by local tests; the live database and authentication flow still need separate acceptance testing.
 
-```typescript
-// Example: The Compliance Sentinel Middleware
-export function sanitizeQuery(rawInput: string): string {
-    const PII_REGEX = /[0-9]{13}/g; // Basic SA ID Pattern
-    return rawInput.replace(PII_REGEX, "[REDACTED_ID]");
-}
-```
+## Reduce what reaches AI
 
-## The Human-Centric Element
+LeadFlow keeps the raw message separate from operational fields and a smaller, derived input prepared for optional AI assistance. The preparation layer removes or generalises some personal details and blocks AI processing when it detects sensitive content. Redaction is a safeguard, not proof that the derived text is anonymous. Provider configuration and privacy review remain open requirements; AI assistance is not enabled for production use.
 
-Privacy builds trust. When your employees and customers know their data is protected by a *Compliance Sentinel*, adoption rates skyrocket. It is the core of Afro-futurist design—technology that elevates the human condition without exploiting it.
+## Keep the decision with a person
+
+The prototype separates a suggested reply from approval and manual sending. A staff member must review the exact draft before marking it approved. Editing that draft requires another review. AI output cannot set prices, override the deterministic classification, or send a customer message on its own.
+
+The local privacy controls also stop earlier AI and outbound work after a restriction, withdrawal, or objection is recorded. Releasing a temporary restriction does not restore an old approval or draft.
+
+## What remains to prove
+
+Local code and tests do not establish POPIA compliance or production readiness. Before real customer use, AI Nexus still needs isolated checks of database access rules, staff sessions, concurrent actions, backup and recovery, provider handling, retention, notices, and rights requests. Measured time savings and customer outcomes would require a real, consented operating baseline; none are claimed here.
